@@ -8,7 +8,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import { FaClone } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
 import { FaStarOfDavid } from 'react-icons/fa';
-import { useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { MdDarkMode } from 'react-icons/md';
 import { BsBrightnessHighFill } from 'react-icons/bs';
@@ -86,33 +86,6 @@ const Self = () => {
         }
     };
 
-    const ConfirmationModal = ({ onConfirm, onCancel }) => {
-        return (
-            <div className="confirmation-modal">
-                <p>Are you sure you want to delete your account?</p>
-                <button onClick={onConfirm}>Yes</button>
-                <button onClick={onCancel}>Cancel</button>
-            </div>
-        );
-    };
-
-    const handleDeleteAccount = () => {
-        setIsConfirmationModalOpen(true);
-    };
-
-    const handleConfirmedDelete = async () => {
-        try {
-            await axios.delete('https://hepy-backend.vercel.app/user', {
-                data: { userId },
-                headers: {
-                    Authorization: `Bearer ${authToken}`,
-                },
-            });
-            navigate('/');
-        } catch (error) {
-            console.error('Error deleting account:', error);
-        }
-    };
 
     const handleReadMoreClick = () => {
         setShowMore(!showMore);
@@ -186,11 +159,23 @@ const Self = () => {
         setIsSettingBtnOpen(!isSettingBtnOpen);
     };
 
+    const handleDeleteAccount = async () => {
+        try {
+          await axios.delete('https://hepy-backend.vercel.app/user', {
+            data: { userId },
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          });
+          navigate('/');
+        } catch (error) {
+          console.error('Error deleting account:', error);
+        }
+      };
+    
     const toggleTheme = () => {
         setIsDarkMode(!isDarkMode);
     };
-
-    const navigate = useNavigate();
 
     const handleSelfLogoutClick = () => {
         removeCookie('UserId', cookies.UserId)
@@ -208,6 +193,7 @@ const Self = () => {
         window.location.href = '/Messages';
     };
 
+    const navigate = useNavigate();
 
     return (
 
@@ -370,12 +356,6 @@ const Self = () => {
                 </div>
             ) : (
                 <div className="bottom-button-container"></div>
-            )}
-            {isConfirmationModalOpen && (
-                <ConfirmationModal
-                    onConfirm={handleConfirmedDelete}
-                    onCancel={() => setIsConfirmationModalOpen(false)}
-                />
             )}
         </div>
     );
