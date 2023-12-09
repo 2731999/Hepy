@@ -942,11 +942,11 @@ hr {
   color: #fff;
 }
 
-/* Add this CSS for the ConfirmationModal */
 .confirmation-modal {
   position: fixed;
-  width: 80vw;
-  height: 14vh;
+  width: 65vw;
+  height: 12vh;
+  padding: 10px;
   border-radius: 20px;
   top: 50%;
   left: 50%;
