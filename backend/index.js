@@ -18,7 +18,6 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        // origin: 'https://hepy-abhisheks-projects-b60f698d.vercel.app/',
         origin: 'https://hepy-app.vercel.app/',
         methods: ['GET', 'POST'],
         credentials: true,
@@ -144,6 +143,32 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Delete Account
+app.delete('/user', async (req, res) => {
+    console.log('Delete account route accessed:', req.body);
+    const client = new MongoClient(uri);
+    const userId = req.body.userId;
+
+    try {
+        await client.connect();
+        const database = client.db('hepy-data');
+        const users = database.collection('users');
+
+        const query = { user_id: userId };
+        const deletedUser = await users.findOneAndDelete(query);
+
+        if (deletedUser.value) {
+            return res.status(200).json({ message: 'Account deleted successfully' });
+        } else {
+            return res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting account:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } finally {
+        await client.close();
+    }
+});
 
 app.get('/user', async (req, res) => {
     const client = new MongoClient(uri)
