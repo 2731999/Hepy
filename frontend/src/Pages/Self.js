@@ -100,17 +100,24 @@ const Self = () => {
 
     const handleConfirmedDelete = async () => {
         try {
-            await axios.delete('https://hepy-backend.vercel.app/user', {
+            const response = await axios.delete('https://hepy-backend.vercel.app/user', {
                 data: { userId },
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
             });
-            navigate('/');
+    
+            if (response.status === 200) {
+                // Successful deletion, perform any additional client-side actions
+                navigate('/');
+            } else {
+                console.error('Unexpected server response:', response);
+            }
         } catch (error) {
             console.error('Error deleting account:', error);
         }
     };
+    
 
     const handleReadMoreClick = () => {
         setShowMore(!showMore);
