@@ -931,10 +931,15 @@ hr {
 .selfSetting-delete {
   display: flex;
   font-size: 13px;
-  gap: 115px;
-  padding: 40px;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
   color: rgb(87, 87, 87);
-  margin-top: -10px;
+  margin-top: 20px;
+}
+
+.selfSettingdelete.dark-button {
+  color: rgb(255, 255, 255);
 }
 
 /* Add this CSS for the ConfirmationModal */
