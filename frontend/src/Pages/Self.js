@@ -9,6 +9,7 @@ import { FaClone } from 'react-icons/fa';
 import { FaHeart } from 'react-icons/fa';
 import { FaStarOfDavid } from 'react-icons/fa';
 import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom';
 import { MdDarkMode } from 'react-icons/md';
 import { BsBrightnessHighFill } from 'react-icons/bs';
 
@@ -33,24 +34,25 @@ const Self = () => {
     const [interests, setInterests] = useState([]);
     const [largePhotos, setLargePhotos] = useState([]);
     const [smallPhotos, setSmallPhotos] = useState([]);
+    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
     const userId = cookies.UserId
-
+    const authToken = cookies.AuthToken;
 
     const handleAddPhoto = async (e) => {
         const file = e.target.files[0];
-    
+
         if (file) {
             const reader = new FileReader();
             reader.onload = async (e) => {
                 const newPhoto = { src: e.target.result, caption: '' };
                 setSmallPhotos((prevPhotos) => [...prevPhotos, newPhoto]);
-    
+
                 try {
                     const data = new FormData();
                     data.append("file", file);
                     data.append("upload_preset", "Hepy-App");
                     data.append("cloud_name", "dbqu0itdj");
-    
+
                     const response = await fetch(
                         "https://api.cloudinary.com/v1_1/dbqu0itdj/image/upload",
                         {
@@ -58,12 +60,12 @@ const Self = () => {
                             body: data,
                         }
                     );
-    
+
                     const imageData = await response.json();
                     const imageUrl = imageData.url;
-    
+
                     console.log('Image URL:', imageUrl);
-    
+
                     // Save the image URL to the database
                     try {
                         const saveResponse = await axios.post('https://hepy-backend.vercel.app/user3', {
@@ -74,16 +76,43 @@ const Self = () => {
                     } catch (saveError) {
                         console.log('Error saving image URL to the database:', saveError);
                     }
-    
+
                 } catch (error) {
                     console.log('Error uploading image to Cloudinary:', error);
                 }
             };
-    
+
             reader.readAsDataURL(file);
         }
     };
-    
+
+    const ConfirmationModal = ({ onConfirm, onCancel }) => {
+        return (
+            <div className="confirmation-modal">
+                <p>Are you sure you want to delete your account?</p>
+                <button onClick={onConfirm}>Yes</button>
+                <button onClick={onCancel}>Cancel</button>
+            </div>
+        );
+    };
+
+    const handleDeleteAccount = () => {
+        setIsConfirmationModalOpen(true);
+    };
+
+    const handleConfirmedDelete = async () => {
+        try {
+            await axios.delete('https://hepy-backend.vercel.app/user', {
+                data: { userId },
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            });
+            navigate('/');
+        } catch (error) {
+            console.error('Error deleting account:', error);
+        }
+    };
 
     const handleReadMoreClick = () => {
         setShowMore(!showMore);
@@ -160,6 +189,8 @@ const Self = () => {
     const toggleTheme = () => {
         setIsDarkMode(!isDarkMode);
     };
+
+    const navigate = useNavigate();
 
     const handleSelfLogoutClick = () => {
         removeCookie('UserId', cookies.UserId)
@@ -325,11 +356,26 @@ const Self = () => {
                             <h3 className={`selfSettingThemeHead${isDarkMode ? ' dark' : ''}`}>Theme</h3>
                             <DarkMode toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
                         </div>
+                        <div className='selfSetting-delete'>
+                            <h2>Account</h2>
+                            <button
+                                className={`selfSettingDeleteBtn${isDarkMode ? ' dark-button' : ''}`}
+                                onClick={handleDeleteAccount}
+                            >
+                                Delete
+                            </button>
+                        </div>
                         {/* <button className='selfSettingBtn'>Save</button> */}
                     </div>
                 </div>
             ) : (
                 <div className="bottom-button-container"></div>
+            )}
+            {isConfirmationModalOpen && (
+                <ConfirmationModal
+                    onConfirm={handleConfirmedDelete}
+                    onCancel={() => setIsConfirmationModalOpen(false)}
+                />
             )}
         </div>
     );
