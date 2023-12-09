@@ -938,8 +938,8 @@ hr {
   margin-top: 20px;
 }
 
-.selfSettingdelete.dark-button {
-  color: rgb(255, 255, 255);
+.selfSetting-delete.dark {
+  color: #fff;
 }
 
 /* Add this CSS for the ConfirmationModal */
