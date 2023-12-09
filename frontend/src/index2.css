@@ -914,6 +914,57 @@ hr {
   color: #fff;
 }
 
+.selfSettingDeleteBtn {
+  background-color: red;
+  color: white;
+  border: none;
+  height: 5vh;
+  width: 20vw;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selfSettingDeleteBtn.dark-button {
+  background-color: darkred;
+}
+
+.selfSetting-delete {
+  display: flex;
+  font-size: 13px;
+  gap: 115px;
+  padding: 40px;
+  color: rgb(87, 87, 87);
+  margin-top: -10px;
+}
+
+/* Add this CSS for the ConfirmationModal */
+.confirmation-modal {
+  position: fixed;
+  width: 80vw;
+  height: 14vh;
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.confirmation-modal button {
+  margin-right: 10px;
+  height: 3vh;
+  background-color: transparent;
+  color: var(--hepygirlcolor);
+  border: none;
+  font-size: 15px;
+}
+
+.confirmation-modal button {
+  margin-right: 10px;
+}
+
 
 /* -----------------Self Footer------------- */
 
