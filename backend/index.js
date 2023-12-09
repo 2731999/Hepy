@@ -157,11 +157,11 @@ app.delete('/user', async (req, res) => {
         const query = { user_id: userId };
         const deletedUser = await users.findOneAndDelete(query);
 
-        if (deletedUser.value) {
+        if (result.value) {
             return res.status(200).json({ message: 'Account deleted successfully' });
         } else {
             return res.status(404).json({ message: 'User not found' });
-        }
+        }        
     } catch (error) {
         console.error('Error deleting account:', error);
         res.status(500).json({ error: 'Internal Server Error' });
