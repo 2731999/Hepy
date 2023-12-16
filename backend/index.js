@@ -7,12 +7,14 @@ const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const speakeasy = require('speakeasy');
+const { generateSecret } = require('speakeasy');
+const otpSecrets = {};
 const bcrypt = require('bcrypt');
-
 const PORT = process.env.PORT || 1000;
 const uri = 'mongodb+srv://hepyapp:Hepy12345!@cluster0.51e0pcz.mongodb.net/?retryWrites=true&w=majority';
 
-app.use(cors()); 
+app.use(cors());
 app.use(express.json());
 
 const server = http.createServer(app);
@@ -138,6 +140,38 @@ app.post('/login', async (req, res) => {
         res.status(400).json('Invalid Credentials');
     } catch (err) {
         console.log(err);
+    } finally {
+        await client.close();
+    }
+});
+
+app.post('/send-otp', async (req, res) => {
+    const { phoneNumber } = req.body;
+
+    try {
+        // Check if the user exists (you may need to modify this based on your user data structure)
+        const client = new MongoClient(uri);
+        await client.connect();
+        const database = client.db('hepy-data');
+        const users = database.collection('users');
+        const existingUser = await users.findOne({ phone_number: phoneNumber });
+
+        if (!existingUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Generate a new OTP
+        const otpSecret = generateSecret({ length: 4, name: 'YourAppName' });
+        otpSecrets[phoneNumber] = otpSecret;
+
+        // Send the OTP to the user (you may use a third-party service for SMS or other delivery methods)
+        // For testing purposes, you can log the OTP to the console
+        console.log(`OTP for ${phoneNumber}: ${otpSecret.base32}`);
+
+        res.status(200).json({ message: 'OTP sent successfully' });
+    } catch (error) {
+        console.error('Error sending OTP:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     } finally {
         await client.close();
     }
