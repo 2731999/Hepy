@@ -76,7 +76,7 @@ function Verifications() {
             const { confirmation } = user;
             const data = await confirmation.confirm(otp);
 
-            const savePhoneNumberResponse = await fetch('http://localhost:5000/phone-number', {
+            const savePhoneNumberResponse = await fetch('https://hepy-backend.vercel.app/phone-number', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
