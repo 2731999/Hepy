@@ -373,19 +373,8 @@ body {
   height: 20px;
 }
 
-.PhoneInput input:hover {
-  border: none;
-}
-
-.react-tel-input .form-control {
-  border: none;
-  font-size: 18px;
-  bottom: 2px
-}
-
 .react-tel-input .flag-dropdown {
-  border: none;
-  background-color: transparent;
+  margin-left: 16px;
 }
 
 /* Styles for OTP Verification Page */

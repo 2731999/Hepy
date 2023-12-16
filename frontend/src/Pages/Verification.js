@@ -1,209 +1,167 @@
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import { AsYouType } from 'libphonenumber-js/min';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { auth } from '../firebase/setup';
 import { FaAngleLeft } from 'react-icons/fa';
 import { FiDelete } from 'react-icons/fi';
+import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 
-// NumericKeypad component 
 const NumericKeypad = ({ otp, onOtpChange }) => {
-  const handleNumberClick = (number) => {
-    if (number === '#') {
-      const newOtp = otp.slice(0, -1);
-      onOtpChange({ target: { value: newOtp } });
-    } else if (otp.length < 4) {
-      const newOtp = otp + number;
-      onOtpChange({ target: { value: newOtp } });
-    }
-  };
+    const handleNumberClick = (number) => {
+        if (number === '#') {
+            const newOtp = otp.slice(0, -1);
+            onOtpChange({ target: { value: newOtp } });
+        } else if (otp.length < 6) {
+            const newOtp = otp + number;
+            onOtpChange({ target: { value: newOtp } });
+        }
+    };
 
-  return (
-    <div className="numeric-keypad">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '#'].map((number) => (
-        <button
-          key={number}
-          onClick={() => handleNumberClick(number)}
-          className={`numeric-button ${number === 0 ? 'zero' : ''} ${number === '#' ? 'hash' : ''}`}
-        >
-          {number === '#' ? <FiDelete /> : number}
-        </button>
-      ))}
-    </div>
-  );
-};
-
-// OtpVerification component
-const OtpVerification = ({ setShowOtpPage }) => {
-  const [otp, setOtp] = useState('');
-  const [timer, setTimer] = useState(60);
-
-
-  const handleOtpChange = (event) => {
-    const value = event.target.value;
-    if (!isNaN(value) && value.length <= 4) {
-      setOtp(value);
-    }
-  };
-
-  const handleSendAgain = () => {
-    setTimer(60);
-  };
-
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    const formattedSeconds = remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
-    return `${formattedMinutes}:${formattedSeconds}`;
-  };
-
-  useEffect(() => {
-    if (timer > 0) {
-      const interval = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [timer]);
-
-  return (
-    <div className='otpPage'>
-      <button className='otpBack' onClick={() => setShowOtpPage(false)}><FaAngleLeft /></button>
-      <p className="timer">{formatTime(timer)}</p>
-      <div className='otpPhara'>
-        <p className='p1'>Type the verification code</p>
-        <p> we've sent you</p>
-      </div>
-      <div className='otp-container'>
-        {Array.from({ length: 4 }, (_, index) => (
-          <input
-            key={index}
-            type="text"
-            maxLength="1"
-            value={otp[index] || ''}
-            onChange={handleOtpChange}
-          />
-        ))}
-      </div>
-      <NumericKeypad otp={otp} onOtpChange={handleOtpChange} />
-      <div className='sendBtn'>
-        <button className='sendAgainBtn' onClick={handleSendAgain} disabled={timer > 0}>
-          Send Again
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// CustomPhoneInput component
-const CustomPhoneInput = ({ value, onChange }) => {
-  const handleInputChange = (value) => {
-    onChange(value);
-  };
-
-  return (
-    <div className="custom-phone-input">
-      <div className="phone-input-container">
-        <div className="phone-input">
-          <PhoneInput
-            international
-            defaultCountry="US"
-            value={value}
-            onChange={handleInputChange}
-            placeholder="Enter phone number"
-          />
+    return (
+        <div className="numeric-keypad">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '#'].map((number) => (
+                <button
+                    key={number}
+                    onClick={() => handleNumberClick(number)}
+                    className={`numeric-button ${number === 0 ? 'zero' : ''} ${number === '#' ? 'hash' : ''}`}
+                >
+                    {number === '#' ? <FiDelete /> : number}
+                </button>
+            ))}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
+function Verifications() {
+    const [phone, setPhone] = useState('');
+    const [user, setUser] = useState({ confirmation: null });
+    const [showVerification, setShowVerification] = useState(false);
+    const [otp, setOtp] = useState('');
+    const [timer, setTimer] = useState(60);
+    const [cookies, setCookie, removeCookie] = useCookies("user")
 
-// Main component
-// const Verification = () => {
-//   const [phoneNumber, setPhoneNumber] = useState('');
-//   const [showOtpPage, setShowOtpPage] = useState(false);
 
-//   const handlePhoneNumberChange = (value) => {
-//     setPhoneNumber(value);
-//   };
+    const sendOtp = async () => {
+        try {
+            const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
+            const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
+            setUser({ confirmation });
+            setShowVerification(true);
+            startTimer();
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
-//   const handleContinue = () => {
-//     setShowOtpPage(true);
-//   };
+    const startTimer = () => {
+        setTimer(60);
+        const interval = setInterval(() => {
+            setTimer((prevTimer) => (prevTimer > 0 ? prevTimer - 1 : 0));
+        }, 1000);
+        return () => clearInterval(interval);
+    };
 
-//   return (
-//     <div className="verificationPage">
-//       {showOtpPage ? (
-//         <OtpVerification setShowOtpPage={setShowOtpPage} />
-//       ) : (
-//         <div className="verContent">
-//           <h1>My Mobile</h1>
-//           <p>Please enter your valid phone number. We will send you a 4-digit code to verify your account.</p>
-//           <CustomPhoneInput value={phoneNumber} onChange={handlePhoneNumberChange} />
-//           <button className="continueBtn" onClick={handleContinue}>
-//             Continue
-//           </button>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
+    const handleOtpChange = (event) => {
+        const value = event.target.value;
+        if (!isNaN(value) && value.length <= 6) {
+            setOtp(value);
+        }
+    };
 
-// Main component
-const Verification = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [showOtpPage, setShowOtpPage] = useState(false);
-  const [otpSent, setOtpSent] = useState(false);
 
-  const handlePhoneNumberChange = (value) => {
-    setPhoneNumber(value);
-  };
+    const verifyOtp = async () => {
+        try {
+            const { confirmation } = user;
+            const data = await confirmation.confirm(otp);
 
-  const handleContinue = async () => {
-    try {
-      // Make a request to the backend to send OTP
-      const response = await fetch('http://localhost:5000/send-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          phoneNumber: phoneNumber,
-        }),
-      });
+            const savePhoneNumberResponse = await fetch('http://localhost:5000/phone-number', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: data.user.user_id,
+                    phoneNumber: phone,
+                }),
+            });
 
-      if (response.ok) {
-        setShowOtpPage(true);
-        setOtpSent(true);
-      } else {
-        const errorData = await response.json();
-        console.error('Failed to send OTP:', errorData.error);
-        // Handle error, display an error message to the user, etc.
-      }
-    } catch (error) {
-      console.error('Network error:', error);
-      // Handle network error
-    }
-  };
+            console.log('Server Response:', savePhoneNumberResponse);
+            const responseData = await savePhoneNumberResponse.json();
+            console.log('Server Response Data:', responseData);
+            setCookie('AuthToken', responseData.token);
+            setCookie('UserId', responseData.userId);
 
-  return (
-    <div className="verificationPage">
-      {showOtpPage ? (
-        <OtpVerification setShowOtpPage={setShowOtpPage} />
-      ) : (
-        <div className="verContent">
-          <h1>My Mobile</h1>
-          <p>Please enter your valid phone number. We will send you a 4-digit code to verify your account.</p>
-          <CustomPhoneInput value={phoneNumber} onChange={handlePhoneNumberChange} />
-          <button className="continueBtn" onClick={handleContinue} disabled={otpSent}>
-            {otpSent ? 'OTP Sent' : 'Continue'}
-          </button>
+            console.log('Updated Cookies:', cookies);
+
+            navigate('/ProfileDetail');
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
+
+
+    const navigate = useNavigate();
+
+    return (
+        <div className="verificationPage">
+            {!showVerification ? (
+                <div className="verContent">
+                    <h1>My Mobile</h1>
+                    <p>Please enter your valid phone number. We will send you a 4-digit code to verify your account.</p>
+                    <div className="custom-phone-input">
+                        <div className="phone-input-container">
+                            <div className="phone-input">
+                                <PhoneInput
+                                    country={'us'}
+                                    value={phone}
+                                    onChange={(phone) => setPhone('+' + phone)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <button className="continueBtn" onClick={sendOtp}>
+                        Continue
+                    </button>
+                    <div id="recaptcha" style={{ marginTop: '30px', marginLeft: '12px' }}></div>
+                </div>
+            ) : (
+                <div className="verifyOtp">
+                    <button className="otpBack" onClick={() => setShowVerification(false)}>
+                        <FaAngleLeft />
+                    </button>
+                    <p className="timer">{timer}0</p>
+                    <div className="otpPhara">
+                        <p className="p1">Type the verification code</p>
+                        <p> we've sent you</p>
+                    </div>
+                    <div className="otp-container">
+                        {Array.from({ length: 6 }, (_, index) => (
+                            <input
+                                key={index}
+                                type="text"
+                                maxLength="1"
+                                value={otp[index] || ''}
+                                onChange={(e) => setOtp(e.target.value)}
+                            />
+                        ))}
+                    </div>
+                    <NumericKeypad otp={otp} onOtpChange={handleOtpChange} />
+                    <div className="sendBtn">
+                        <button className="OTPVerify" onClick={verifyOtp}>
+                            Verify OTP
+                        </button>
+                        <button className="sendAgainBtn" disabled={timer > 0} onClick={sendOtp}>
+                            Resend OTP
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
-};
+    );
+}
 
-export default Verification;
-
+export default Verifications;
