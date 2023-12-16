@@ -1,0 +1,449 @@
+.change-to-boy-color {
+    --hepygirlcolor: var(--hepyboycolor);
+}
+
+/* Add your CSS styles here */
+.Discover {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    position: relative;
+}
+
+.discover-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+
+.discover-back-arrow,
+.discover-filter-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--hepygirlcolor)
+}
+
+.discover-card-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.discover-card {
+    margin-left: -155px;
+    height: 55vh;
+    margin-top: 15px;
+    width: 80vw;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+}
+
+.discover-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+    z-index: 2;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.card-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+}
+
+.card-stack-item {
+    position: relative;
+    z-index: 1;
+}
+
+.mid {
+    position: absolute;
+}
+
+.card-stack .react-swipe-card {
+    background-color: transparent;
+}
+
+.discover-card-img img {
+    width: 100%;
+    height: 55vh;
+    object-fit: cover;
+    border-radius: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.discover-card-p {
+    position: absolute;
+    display: flex;
+    z-index: 3;
+    color: white;
+    bottom: 4vh;
+    gap: 15px;
+    left: 5vw;
+    font-size: 20px;
+}
+
+.discover-card-profession {
+    position: absolute;
+    z-index: 3;
+    color: rgb(228, 228, 228);
+    bottom: 2vh;
+    left: 5vw;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.no-more-cards-message {
+    position: absolute;
+    top: 30vh;
+    left: 15vw;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--hepygirlcolor)
+}
+
+.discover-circle-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60vh;
+    position: sticky;
+}
+
+.discover-circle-icon {
+    margin: 0 10px;
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffbb00;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.discover-star-circle-icon {
+    margin: 0 10px;
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: purple;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.discover-big-circle-icon {
+    margin: 0 10px;
+    width: 80px;
+    height: 80px;
+    background-color: var(--hepygirlcolor);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.discover-footer {
+    background-color: #f0f0f0;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.discover-footer.sticky {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.discover-footer-icons {
+    display: flex;
+    justify-content: center;
+}
+
+.discover-footer-icon {
+    color: rgb(131, 131, 131);
+    font-size: 24px;
+    margin: 5px 35px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.discover-footer-icon:hover {
+    color: var(--hepygirlcolor);
+}
+
+
+.discoverFilter-container {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 80vh;
+    margin-top: -65vh;
+    position: absolute;
+    border: none;
+    z-index: 1000;
+    position: relative;
+    background: white;
+    border: 1px solid #a0a096;
+    line-height: 1.125em;
+    text-align: center;
+}
+
+.discoveroverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.discover-filter-heding {
+    display: flex;
+    justify-content: center;
+}
+
+.discover-filter-heding h2 {
+    margin-left: 30vw;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.discoverFilterBtn {
+    color: var(--hepygirlcolor);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 16vw;
+}
+
+.discover-filter-intrest {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.discover-filter-intrest h4 {
+    text-align: left;
+}
+
+.filter-box-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -10px;
+}
+
+.filter-box {
+    margin-bottom: 10px;
+    flex: 1 1;
+    background-color: white;
+    padding: 15px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-box:first-child {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.filter-box:last-child {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.filter-box:hover {
+    background-color: var(--hepygirlcolor);
+    color: #fff;
+    border: none;
+}
+
+.discover-filter-location {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    margin-top: 2vh;
+    align-items: center;
+}
+
+.discover-filter-locationHead {
+    font-weight: bold;
+    align-self: flex-start;
+    color: gray;
+    font-size: 12px;
+    margin-left: 17vw;
+    margin-bottom: 3px;
+}
+
+.css-13cymwt-control {
+    height: 50px;
+    border-radius: 15px;
+    position: relative;
+    margin-top: 3px;
+    width: 80vw;
+    text-align: left;
+}
+
+.css-t3ipsp-control {
+    height: 2px;
+    border-radius: 15px;
+    position: relative;
+    margin-top: 3px;
+    width: 80vw;
+    text-align: left;
+}
+
+.filter-distance {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 14px;
+}
+
+.filter-distance label {
+    font-weight: bold;
+}
+
+.filter-distance h3 {
+    font-weight: 200;
+}
+
+.filter-age-input {
+    margin-bottom: 5vh;
+}
+
+.filter-location-input input[type="range"] {
+    width: 80%;
+    height: 3px;
+    background-color: darkgray;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.filter-location-input input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background-color: var(--hepygirlcolor);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.filter-age {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 14px;
+    margin-top: 3vh;
+}
+
+.filter-age label {
+    font-weight: bold;
+}
+
+.filter-age h3 {
+    font-weight: 200;
+}
+
+.filter-age-input input[type="range"] {
+    width: 80%;
+    height: 3px;
+    background-color: darkgray;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.filter-age-input input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background-color: var(--hepygirlcolor);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.filter-box h3 {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.filter-box p {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+.discoverFilter-toggle-button {
+    background-color: transparent;
+    color: var(--hepygirlcolor);
+    border: none;
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-top: -5px;
+}
+
+.discoverFilterclearBtn {
+    color: white;
+    height: 7vh;
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--hepygirlcolor);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.616);
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 10vw;
+}
