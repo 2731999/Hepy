@@ -1,52 +1,49 @@
-const express = require('express');
-const app = express();
-const http = require('http');
-const socketIo = require('socket.io');
-const path = require('path');
-const { MongoClient } = require('mongodb');
+const PORT = 1000
+const express = require("express")
+const { MongoClient } = require("mongodb")
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const speakeasy = require('speakeasy');
-const { generateSecret } = require('speakeasy');
-const otpSecrets = {};
 const bcrypt = require('bcrypt');
-const PORT = process.env.PORT || 1000;
-const uri = 'mongodb+srv://hepyapp:Hepy12345!@cluster0.51e0pcz.mongodb.net/?retryWrites=true&w=majority';
+const http = require("http");
+const socketIo = require("socket.io");
+const uri = "mongodb+srv://hepyapp:Hepy12345!@cluster0.51e0pcz.mongodb.net/?retryWrites=true&w=majority";
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: 'https://hepy-app.vercel.app/',
-        methods: ['GET', 'POST'],
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
         credentials: true,
     },
 });
 
-io.on('connection', (socket) => {
+io.on("connection", (socket) => {
     console.log(`User connected: ${socket.id}`);
 
-    socket.on('send_message', (data) => {
-        console.log('Received message:', data);
-        socket.to(data.room).emit('receive_message', data);
+    socket.on("send_message", (data) => {
+        console.log("Received message:", data);
+        socket.to(data.room).emit("receive_message", data);
     });
 
-    socket.on('disconnect', () => {
+    socket.on("disconnect", () => {
         console.log(`User disconnected: ${socket.id}`);
     });
 });
 
+
 app.get('/', (req, res) => {
-    res.json('API is running in E');
+    res.json("API is running");
 });
 
-//  Sign up to the Database
+// Sign up to the Database
 app.post('/signup', async (req, res) => {
     const client = new MongoClient(uri);
-    const { email, password } = req.body;
+    const { email, password, phoneNumber } = req.body;
     const generatedUserId = uuidv4();
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -66,7 +63,8 @@ app.post('/signup', async (req, res) => {
         const data = {
             user_id: generatedUserId,
             email: sanitizedEmail,
-            hashed_password: hashedPassword
+            hashed_password: hashedPassword,
+            phone_number: phoneNumber
         }
 
         const insertedUser = await users.insertOne(data);
@@ -85,6 +83,41 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+// Add a new endpoint to save the verified phone number
+
+app.put('/phone-number', async (req, res) => {
+    const client = new MongoClient(uri);
+    const { phoneNumber } = req.body;
+    const generatedUserId = uuidv4();
+
+    try {
+        await client.connect();
+        const database = client.db('hepy-data');
+        const users = database.collection('users');
+
+        const existingUser = await users.findOne({ phone_number: phoneNumber });
+        if (existingUser) {
+            return res.status(409).json('Number already used. Please login');
+        }
+        const userData = {
+            user_id: generatedUserId,
+            phone_number: phoneNumber,
+        };
+
+        const insertedUser = await users.insertOne(userData);
+        const token = jwt.sign({ user_id: generatedUserId, phone_number: phoneNumber }, 'your_secret_key', {
+            expiresIn: 60 * 24
+        });
+        res.cookie('UserId', generatedUserId);
+        res.status(201).json({ token, userId: generatedUserId, phone_number: phoneNumber, user_id: generatedUserId });
+        console.log('User ID:', generatedUserId);
+    } catch (err) {
+        console.error('Error:', err.message);
+        res.status(500).json('Internal Server Error');
+    } finally {
+        await client.close();
+    }
+});
 
 app.post('/check-email-exists', async (req, res) => {
     const client = new MongoClient(uri);
@@ -145,39 +178,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.post('/send-otp', async (req, res) => {
-    const { phoneNumber } = req.body;
-
-    try {
-        // Check if the user exists (you may need to modify this based on your user data structure)
-        const client = new MongoClient(uri);
-        await client.connect();
-        const database = client.db('hepy-data');
-        const users = database.collection('users');
-        const existingUser = await users.findOne({ phone_number: phoneNumber });
-
-        if (!existingUser) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        // Generate a new OTP
-        const otpSecret = generateSecret({ length: 4, name: 'YourAppName' });
-        otpSecrets[phoneNumber] = otpSecret;
-
-        // Send the OTP to the user (you may use a third-party service for SMS or other delivery methods)
-        // For testing purposes, you can log the OTP to the console
-        console.log(`OTP for ${phoneNumber}: ${otpSecret.base32}`);
-
-        res.status(200).json({ message: 'OTP sent successfully' });
-    } catch (error) {
-        console.error('Error sending OTP:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    } finally {
-        await client.close();
-    }
-});
-
-// Delete Account
 app.delete('/user', async (req, res) => {
     console.log('Delete account route accessed:', req.body);
     const client = new MongoClient(uri);
@@ -343,6 +343,8 @@ app.post('/message', async (req, res) => {
 app.put('/user', async (req, res) => {
     const client = new MongoClient(uri)
     const formData = req.body.formData
+
+    console.log('Received FormData:', formData); // Add this line for debugging
 
     console.log(formData)
 
