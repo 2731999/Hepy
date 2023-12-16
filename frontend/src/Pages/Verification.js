@@ -120,16 +120,71 @@ const CustomPhoneInput = ({ value, onChange }) => {
 
 
 // Main component
+// const Verification = () => {
+//   const [phoneNumber, setPhoneNumber] = useState('');
+//   const [showOtpPage, setShowOtpPage] = useState(false);
+
+//   const handlePhoneNumberChange = (value) => {
+//     setPhoneNumber(value);
+//   };
+
+//   const handleContinue = () => {
+//     setShowOtpPage(true);
+//   };
+
+//   return (
+//     <div className="verificationPage">
+//       {showOtpPage ? (
+//         <OtpVerification setShowOtpPage={setShowOtpPage} />
+//       ) : (
+//         <div className="verContent">
+//           <h1>My Mobile</h1>
+//           <p>Please enter your valid phone number. We will send you a 4-digit code to verify your account.</p>
+//           <CustomPhoneInput value={phoneNumber} onChange={handlePhoneNumberChange} />
+//           <button className="continueBtn" onClick={handleContinue}>
+//             Continue
+//           </button>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// Main component
 const Verification = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showOtpPage, setShowOtpPage] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
 
   const handlePhoneNumberChange = (value) => {
     setPhoneNumber(value);
   };
 
-  const handleContinue = () => {
-    setShowOtpPage(true);
+  const handleContinue = async () => {
+    try {
+      // Make a request to the backend to send OTP
+      const response = await fetch('http://localhost:5000/send-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phoneNumber: phoneNumber,
+        }),
+      });
+
+      if (response.ok) {
+        setShowOtpPage(true);
+        setOtpSent(true);
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to send OTP:', errorData.error);
+        // Handle error, display an error message to the user, etc.
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      // Handle network error
+    }
   };
 
   return (
@@ -141,8 +196,8 @@ const Verification = () => {
           <h1>My Mobile</h1>
           <p>Please enter your valid phone number. We will send you a 4-digit code to verify your account.</p>
           <CustomPhoneInput value={phoneNumber} onChange={handlePhoneNumberChange} />
-          <button className="continueBtn" onClick={handleContinue}>
-            Continue
+          <button className="continueBtn" onClick={handleContinue} disabled={otpSent}>
+            {otpSent ? 'OTP Sent' : 'Continue'}
           </button>
         </div>
       )}

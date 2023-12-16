@@ -355,7 +355,7 @@ const Self = () => {
                             <DarkMode toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
                         </div>
                         <div className='selfSetting-delete'>
-                            <h2>Account</h2>
+                            <h3 className={`selfSettingdelete${isDarkMode ? ' dark' : ''}`}>Account</h3>
                             <button
                                 className={`selfSettingDeleteBtn${isDarkMode ? ' dark-button' : ''}`}
                                 onClick={handleDeleteAccount}

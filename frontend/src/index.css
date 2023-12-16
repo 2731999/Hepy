@@ -377,6 +377,17 @@ body {
   border: none;
 }
 
+.react-tel-input .form-control {
+  border: none;
+  font-size: 18px;
+  bottom: 2px
+}
+
+.react-tel-input .flag-dropdown {
+  border: none;
+  background-color: transparent;
+}
+
 /* Styles for OTP Verification Page */
 
 .otpPage {
