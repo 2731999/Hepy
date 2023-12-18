@@ -7,6 +7,7 @@ import { FaAngleLeft } from 'react-icons/fa';
 import { FiDelete } from 'react-icons/fi';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const NumericKeypad = ({ otp, onOtpChange }) => {
     const handleNumberClick = (number) => {
@@ -41,6 +42,8 @@ function Verifications() {
     const [otp, setOtp] = useState('');
     const [timer, setTimer] = useState(60);
     const [cookies, setCookie, removeCookie] = useCookies("user")
+    const [verMessage, setVerMessage] = useState(""); 
+    const [phoneNumberExists, setPhoneNumberExists] = useState(false); 
 
 
     // const sendOtp = async () => {
@@ -51,44 +54,37 @@ function Verifications() {
     //         setShowVerification(true);
     //         startTimer();
     //     } catch (err) {
-    //         console.error('Error sending OTP:', err);
+    //         console. error('Error sending OTP:', err);
     //         console.error('Error Response:', err?.response?.data); 
     //     }
     // };
-
+    
     const sendOtp = async () => {
         try {
-            const checkPhoneNumberResponse = await fetch(`https://hepy-backend.vercel.app/check-phone-number?phoneNumber=${phone}`, {
-                method: 'GET',
+            const checkPhoneNumberResponse = await fetch('https://hepy-backend.vercel.app/check-phone-number-exists', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({
+                    phoneNumber: phone,
+                }),
             });
-    
-            if (!checkPhoneNumberResponse.ok) {
-                console.error('Error checking phone number:', checkPhoneNumberResponse.statusText);
-                return;
-            }
-    
             const checkPhoneNumberData = await checkPhoneNumberResponse.json();
-    
             if (checkPhoneNumberData.exists) {
-                alert('Phone number already exists. Please log in as a user.');
-                return;
+                setPhoneNumberExists(true);
+                setVerMessage('Phone number already exists. Please use different number.');
+            } else {
+                const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
+                const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
+                setUser({ confirmation });
+                setShowVerification(true);
+                startTimer();
             }
-    
-            const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
-            const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
-            setUser({ confirmation });
-            setShowVerification(true);
-            startTimer();
         } catch (err) {
-            console.error('Error sending OTP:', err);
-            console.error('Error Response:', err?.response?.data || 'Unknown error');
+            console.log(err);
         }
     };
-    
-
 
     const startTimer = () => {
         setTimer(60);
@@ -136,8 +132,6 @@ function Verifications() {
     };
 
 
-
-
     const navigate = useNavigate();
 
     return (
@@ -160,6 +154,9 @@ function Verifications() {
                     <button className="continueBtn" onClick={sendOtp}>
                         Continue
                     </button>
+                    {phoneNumberExists && (
+                        <p style={{ color: 'black' }}>{verMessage}</p>
+                    )}
                     <div id="recaptcha" style={{ marginTop: '30px', marginLeft: '12px' }}></div>
                 </div>
             ) : (
