@@ -16,7 +16,7 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://hepy.vercel.app/",
         methods: ["GET", "POST"],
         credentials: true,
     },
@@ -142,6 +142,15 @@ app.post('/check-email-exists', async (req, res) => {
         await client.close();
     }
 });
+
+app.get('/check-phone-number', (req, res) => {
+    const phoneNumber = req.query.phoneNumber;
+      if (usersDatabase.has(phoneNumber)) {
+      res.json({ exists: true });
+    } else {
+      res.json({ exists: false });
+    }
+  });
 
 
 // Log in to the Database
