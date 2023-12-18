@@ -51,10 +51,11 @@ function Verifications() {
             setShowVerification(true);
             startTimer();
         } catch (err) {
-            console.log(err);
+            console.error('Error sending OTP:', err);
+            console.error('Error Response:', err?.response?.data); 
         }
     };
-
+    
     const startTimer = () => {
         setTimer(60);
         const interval = setInterval(() => {
@@ -94,7 +95,6 @@ function Verifications() {
             setCookie('UserId', responseData.userId);
 
             console.log('Updated Cookies:', cookies);
-
             navigate('/ProfileDetail');
         } catch (err) {
             console.error(err);
@@ -133,7 +133,7 @@ function Verifications() {
                     <button className="otpBack" onClick={() => setShowVerification(false)}>
                         <FaAngleLeft />
                     </button>
-                    <p className="timer">{timer}0</p>
+                    <p className="timer">{timer}</p>
                     <div className="otpPhara">
                         <p className="p1">Type the verification code</p>
                         <p> we've sent you</p>
