@@ -44,20 +44,6 @@ function Verifications() {
     const [cookies, setCookie, removeCookie] = useCookies("user")
     const [verMessage, setVerMessage] = useState(""); 
     const [phoneNumberExists, setPhoneNumberExists] = useState(false); 
-
-
-    // const sendOtp = async () => {
-    //     try {
-    //         const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
-    //         const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
-    //         setUser({ confirmation });
-    //         setShowVerification(true);
-    //         startTimer();
-    //     } catch (err) {
-    //         console. error('Error sending OTP:', err);
-    //         console.error('Error Response:', err?.response?.data); 
-    //     }
-    // };
     
     const sendOtp = async () => {
         try {
