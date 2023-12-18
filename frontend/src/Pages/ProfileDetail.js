@@ -143,7 +143,9 @@ const ProfileDetails = () => {
             {isCalendarOpen ? (
                 <div className="calendar-container" style={{ borderTopLeftRadius: '25px', borderTopRightRadius: '25px' }}>
                     <div>
-                    <Calendar onChange={date => setSelectedDOB(date)} />
+                     <div className='react-outer-calendar'>
+                            <Calendar onChange={date => setSelectedDOB(date)} />
+                    </div>
                     <button className='calendarBtn' onClick={saveDOB}>Save</button>
                     </div>
                     <button className="calendar-toggle-button" onClick={toggleCalendar}>
