@@ -1067,7 +1067,7 @@ input {
   gap: 10px;
   width: 96%;
   padding: 20px;
-  margin-left: -35px;
+  margin-left: -20px;
 }
 
 .extra-option-label.active {
@@ -1082,7 +1082,7 @@ input {
   justify-content: center;
   cursor: pointer;
   padding: 10px 20px;
-  width: 28vw;
+  width: 26vw;
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #ccc;
