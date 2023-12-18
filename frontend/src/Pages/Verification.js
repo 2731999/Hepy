@@ -43,8 +43,40 @@ function Verifications() {
     const [cookies, setCookie, removeCookie] = useCookies("user")
 
 
+    // const sendOtp = async () => {
+    //     try {
+    //         const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
+    //         const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
+    //         setUser({ confirmation });
+    //         setShowVerification(true);
+    //         startTimer();
+    //     } catch (err) {
+    //         console.error('Error sending OTP:', err);
+    //         console.error('Error Response:', err?.response?.data); 
+    //     }
+    // };
+
     const sendOtp = async () => {
         try {
+            const checkPhoneNumberResponse = await fetch(`https://hepy-backend.vercel.app/check-phone-number?phoneNumber=${phone}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!checkPhoneNumberResponse.ok) {
+                console.error('Error checking phone number:', checkPhoneNumberResponse.statusText);
+                return;
+            }
+    
+            const checkPhoneNumberData = await checkPhoneNumberResponse.json();
+    
+            if (checkPhoneNumberData.exists) {
+                alert('Phone number already exists. Please log in as a user.');
+                return;
+            }
+    
             const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
             const confirmation = await signInWithPhoneNumber(auth, phone, recaptcha);
             setUser({ confirmation });
@@ -52,10 +84,12 @@ function Verifications() {
             startTimer();
         } catch (err) {
             console.error('Error sending OTP:', err);
-            console.error('Error Response:', err?.response?.data); 
+            console.error('Error Response:', err?.response?.data || 'Unknown error');
         }
     };
     
+
+
     const startTimer = () => {
         setTimer(60);
         const interval = setInterval(() => {

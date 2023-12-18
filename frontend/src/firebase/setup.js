@@ -14,19 +14,3 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app)
 
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import {getAuth} from 'firebase/auth'
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDSpdDtUxRi0wD30eSYMU_S5oRqzoTGbTw",
-//   authDomain: "hepy-1ba05.firebaseapp.com",
-//   projectId: "hepy-1ba05",
-//   storageBucket: "hepy-1ba05.appspot.com",
-//   messagingSenderId: "598267798077",
-//   appId: "1:598267798077:web:6ba4a3247f6d9320f6c054",
-//   measurementId: "G-MFBXS7WQ8J"
-// };
-
-// const app = initializeApp(firebaseConfig);
-// export const auth = getAuth(app)
