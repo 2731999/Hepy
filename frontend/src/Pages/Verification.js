@@ -140,10 +140,10 @@ function Verifications() {
                     <button className="continueBtn" onClick={sendOtp}>
                         Continue
                     </button>
+                    <div id="recaptcha" style={{ marginTop: '30px', marginLeft: '12px' }}></div>
                     {phoneNumberExists && (
                         <p style={{ color: 'black' }}>{verMessage}</p>
                     )}
-                    <div id="recaptcha" style={{ marginTop: '30px', marginLeft: '12px' }}></div>
                 </div>
             ) : (
                 <div className="verifyOtp">
