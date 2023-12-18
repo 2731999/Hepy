@@ -704,6 +704,10 @@ input {
   text-align: center;
 }
 
+.react-outer-calendar {
+  margin-left: -10px
+}
+
 .react-calendar {
   width: 365px;
   max-width: 100%;
