@@ -137,7 +137,7 @@ function Verifications() {
                             </div>
                         </div>
                     </div>
-                    <button className="continueBtn" onClick={sendOtp}>
+                    <button className="verContinueBtn" onClick={sendOtp}>
                         Continue
                     </button>
                     <div id="recaptcha" style={{ marginTop: '30px', marginLeft: '9px' }}></div>
