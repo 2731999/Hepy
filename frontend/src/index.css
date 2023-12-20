@@ -123,6 +123,7 @@ body {
   color: white;
   margin-left: -21vw;
 }
+
 .home-num-login-btn {
   position: absolute;
   margin-top: 38vh;
@@ -366,7 +367,7 @@ body {
   width: 100%;
   height: 8vh;
   margin-top: 15vh;
-  margin-left: -12px;
+  margin-left: -6px;
   color: rgb(255, 255, 255);
   font-size: 15px;
   font-weight: bold;
@@ -542,10 +543,35 @@ body {
 
 .profile-container {
   position: relative;
-  width: 80%;
+  width: 85%;
   max-width: 600px;
-  margin: 15px auto;
+  margin-top: 30px;
+  margin-left: 35px;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin-bottom: 20px;
+}
+
+.profileDetailFooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 230px;
 }
 
 .profile-container h1 {
@@ -620,12 +646,15 @@ body {
 
 .form {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  align-items: center;
 }
 
 .formHead {
@@ -652,8 +681,8 @@ input {
 
 .profilePhara {
   color: rgb(175, 175, 175);
-  margin-top: 3vh;
-  margin-bottom: 4vh;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
   font-size: 12px;
   text-align: center;
 }
@@ -692,20 +721,13 @@ input {
 
 .calendar-container {
   margin-top: -65vh;
-  margin-left: -10vw;
-  position: absolute;
-  border: none;
   z-index: 1000;
   position: relative;
-  width: 124%;
+  width: 100%;
   background: white;
   border: 1px solid #a0a096;
   line-height: 1.125em;
   text-align: center;
-}
-
-.react-outer-calendar {
-  margin-left: -15px
 }
 
 .react-calendar {
@@ -718,6 +740,11 @@ input {
   border-color: white;
   margin-left: 5vw;
   margin-top: 2vh;
+}
+
+.react-outer-calendar {
+  display: flex;
+  align-items: center;
 }
 
 .calendarBtn {

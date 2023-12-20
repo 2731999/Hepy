@@ -99,7 +99,6 @@ function Discover() {
   }
 
   const logRemovedUserMatches = (removedUserId) => {
-    // Fetch matches for the removed user and log them to the console.
     axios.get('https://hepy-backend.vercel.app/user', { params: { userId: removedUserId } })
       .then((response) => {
         const removedUserMatches = response.data.matches;
@@ -113,13 +112,11 @@ function Discover() {
 
   const updateMatches = async (matchedUserId) => {
     try {
-      // Add the matched user ID to the likedProfiles array in the user's database.
       const response = await axios.put('https://hepy-backend.vercel.app/addmatch', {
         userId,
         matchedUserId
       });
 
-      // After successfully updating the database, remove the liked profile from the card stack.
       setGenderedUsers((prevUsers) => prevUsers.slice(0, prevUsers.length - 1));
     } catch (err) {
       console.log(err);
