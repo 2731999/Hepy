@@ -84,10 +84,9 @@ app.post('/signup', async (req, res) => {
 });
 
 // Add a new endpoint to save the verified phone number
-
 app.put('/phone-number', async (req, res) => {
     const client = new MongoClient(uri);
-    const { phoneNumber } = req.body;
+    const { phoneNumber, email, password } = req.body;
     const generatedUserId = uuidv4();
 
     try {
@@ -113,6 +112,48 @@ app.put('/phone-number', async (req, res) => {
         console.log('User ID:', generatedUserId);
     } catch (err) {
         console.error('Error:', err.message);
+        res.status(500).json('Internal Server Error');
+    } finally {
+        await client.close();
+    }
+});
+
+app.post('/phonesignup', async (req, res) => {
+    const client = new MongoClient(uri);
+    const { email, password, phoneNumber } = req.body;
+    const generatedUserId = uuidv4();
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    try {
+        await client.connect();
+        const database = client.db('hepy-data');
+        const users = database.collection('users');
+
+        const existingUser = await users.findOne({ email });
+
+        if (existingUser) {
+            return res.status(409).json('Email already used. Please login');
+        }
+
+        const sanitizedEmail = email.toLowerCase();
+
+        const data = {
+            user_id: generatedUserId,
+            email: sanitizedEmail,
+            hashed_password: hashedPassword,
+            phone_number: phoneNumber
+        }
+
+        const insertedUser = await users.insertOne(data);
+
+        const token = jwt.sign({ user_id: generatedUserId, email: sanitizedEmail }, 'your_secret_key', {
+            expiresIn: 60 * 24
+        });
+        res.cookie('UserId', generatedUserId);
+        res.status(201).json({ token, userId: generatedUserId, email: sanitizedEmail });
+
+    } catch (err) {
+        console.log(err);
         res.status(500).json('Internal Server Error');
     } finally {
         await client.close();
