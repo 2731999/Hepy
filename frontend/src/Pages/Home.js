@@ -6,9 +6,10 @@ import { BsGoogle } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import Verifications from './Verification';
 
 
-const Home = ({ }) => {
+const Home = () => {
     const [showLoginPage, setShowLoginPage] = useState(false);
     const [emailSignupBtnOpen, setEmailSignupBtnOpen] = useState(false);
     const [isSignUp, setIsSignUp] = useState(true);
@@ -32,9 +33,9 @@ const Home = ({ }) => {
     };
 
     const handleNumberSignupClick = () => {
-        navigate('/Verification');
-    }
-
+        navigate('/Verification')
+    };    
+    
     return (
         <div className='mainHome'>
             {!showLoginPage ? (

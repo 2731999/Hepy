@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import Calendar from 'react-calendar';
@@ -9,7 +9,6 @@ import { useCookies } from 'react-cookie';
 const ProfileDetails = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user")
     const [selectedDOB, setSelectedDOB] = useState(null);
-    const [isChatOpen, setIsChatOpen] = useState(false);
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState(null)
@@ -55,6 +54,7 @@ const ProfileDetails = () => {
             console.log(err)
         }
     }
+    
 
     const saveDOB = () => {
         if (selectedDOB) {
@@ -79,6 +79,7 @@ const ProfileDetails = () => {
     };
 
     let navigate = useNavigate()
+
 
     return (
         <div className="profile-container">
@@ -124,41 +125,42 @@ const ProfileDetails = () => {
                             className='form-group-textarea'
                         />
                     </div>
-                    <div className="form-group">
-                        <label className='formHead'>Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            // value={formData.email}
-                            required={true}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className='form-group-textarea'
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className='formHead'>Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            // value={formData.password}
-                            required={true}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className='form-group-textarea'
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className='formHead'>Confirm Password</label>
-                        <input
-                            type="password-check"
-                            id="password-check"
-                            name="password-check"
-                            // value={formData.confirmPassword}
-                            required={true}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            className='form-group-textarea'
-                        />
-                    </div>
+                    {/* {fullForm && (
+                        <>
+                            <div className="form-group">
+                                <label className="formHead">Email</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required={true}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="form-group-textarea"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="formHead">Password</label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    required={true}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="form-group-textarea"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="formHead">Confirm Password</label>
+                                <input
+                                    type="password-check"
+                                    id="password-check"
+                                    name="password-check"
+                                    required={true}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    className="form-group-textarea"
+                                />
+                            </div>
+                        </>
+                    )} */}
                 </form>
             </div>
             <div className='profileDetailFooter'>
