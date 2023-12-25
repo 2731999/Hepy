@@ -13,6 +13,7 @@ import Self from "./Pages/Self";
 import FriendPage from "./Pages/FriendPage";
 import LikesAndSuperLikes from "./Pages/LikesAndSuperLikes";
 import Discover from "./Pages/Discover";
+import FetchTestComponent from "./Pages/test";
 import { useCookies } from "react-cookie"
 
 
@@ -26,6 +27,7 @@ const App = ({ user }) => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/Verification" element={<Verification />}/>
+        <Route path="/test" element={<FetchTestComponent />}/>
         {/* {authToken && <Route path="/Verification" element={<Verification />} />} */}
         {authToken &&<Route path="/ProfileDetail" element={<ProfileDetail />} />}
         {authToken && <Route path="/Notification" element={<Notification />} />}
