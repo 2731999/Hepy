@@ -196,8 +196,8 @@ const Self = () => {
         window.location.href = '/';
     };
 
-    const handleFriendPageClick = () => {
-        window.location.href = '/FriendPage';
+    const handleDiscoverClick = () => {
+        window.location.href = '/Discover';
     };
     const handleLikesAndSuperlikesClick = () => {
         window.location.href = '/LikesAndSuperLikes';
@@ -327,7 +327,7 @@ const Self = () => {
             </div>
             <footer className={`self-footer${isChatOpen ? ' sticky' : ''}${isDarkMode ? ' dark' : ' light'}`}>
                 <div className="self-footer-icons">
-                    <a href="#" className="self-footer-icon" onClick={handleFriendPageClick}>
+                    <a href="#" className="self-footer-icon" onClick={handleDiscoverClick}>
                         <FaClone />
                     </a>
                     <a href="#" className="self-footer-icon" onClick={handleMessagesPageClick}>

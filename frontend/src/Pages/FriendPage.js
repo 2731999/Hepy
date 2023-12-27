@@ -69,6 +69,9 @@ const FriendPage = () => {
     const handleMessagesClick = () => {
         window.location.href = '/Messages';
     };
+    const handleDiscoverClick = () => {
+        window.location.href = '/Discover';
+    };
 
     return (
         <div className='friend-main'>
@@ -160,7 +163,7 @@ const FriendPage = () => {
             </div>
             <footer className={`friendPage-footer${isChatOpen ? ' sticky' : ''}`}>
                 <div className="friendPage-footer-icons">
-                    <a href="#" className="friendPage-footer-icon" style={{ color: 'var(--hepygirlcolor)' }}>
+                    <a href="#" className="friendPage-footer-icon" onClick={handleDiscoverClick}>
                         <FaClone />
                     </a>
                     <a href="#" className="friendPage-footer-icon" onClick={handleMessagesClick}>

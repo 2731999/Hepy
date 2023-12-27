@@ -9,16 +9,10 @@ import { useCookies } from 'react-cookie';
 const ProfileDetails = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user")
     const [selectedDOB, setSelectedDOB] = useState(null);
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
-    const [confirmPassword, setConfirmPassword] = useState(null)
     const [formData, setFormData] = useState({
         user_id: cookies.UserId,
         first_name: '',
         last_name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
         selectedImages: [null],
         DOB: selectedDOB,
     });
@@ -125,42 +119,6 @@ const ProfileDetails = () => {
                             className='form-group-textarea'
                         />
                     </div>
-                    {/* {fullForm && (
-                        <>
-                            <div className="form-group">
-                                <label className="formHead">Email</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    required={true}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="form-group-textarea"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label className="formHead">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    required={true}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="form-group-textarea"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label className="formHead">Confirm Password</label>
-                                <input
-                                    type="password-check"
-                                    id="password-check"
-                                    name="password-check"
-                                    required={true}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="form-group-textarea"
-                                />
-                            </div>
-                        </>
-                    )} */}
                 </form>
             </div>
             <div className='profileDetailFooter'>
