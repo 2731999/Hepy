@@ -87,6 +87,7 @@ app.post('/signup', async (req, res) => {
 app.put('/phone-number', async (req, res) => {
     const client = new MongoClient(uri);
     const { phoneNumber, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
     const generatedUserId = uuidv4();
 
     try {
@@ -101,6 +102,8 @@ app.put('/phone-number', async (req, res) => {
         const userData = {
             user_id: generatedUserId,
             phone_number: phoneNumber,
+            email: email.toLowerCase(),
+            hashed_password: hashedPassword,
         };
 
         const insertedUser = await users.insertOne(userData);
@@ -118,47 +121,72 @@ app.put('/phone-number', async (req, res) => {
     }
 });
 
-app.post('/phonesignup', async (req, res) => {
-    const client = new MongoClient(uri);
-    const { email, password, phoneNumber } = req.body;
-    const generatedUserId = uuidv4();
-    const hashedPassword = await bcrypt.hash(password, 10);
+// app.post('/phonesignup', async (req, res) => {
+//     const client = new MongoClient(uri);
+//     const { email, password } = req.body;
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     try {
+//         await client.connect();
+//         const database = client.db('hepy-data');
+//         const users = database.collection('users');
+
+//         const existingUser = await users.findOne({ email });
+
+//         if (existingUser) {
+//             return res.status(409).json('Email already used. Please login');
+//         }
+
+//         const sanitizedEmail = email.toLowerCase();
+
+//         const data = {
+//             email: sanitizedEmail,
+//             hashed_password: hashedPassword,
+//         }
+
+//         const insertedUser = await users.insertOne(data);
+
+//         res.status(201).json({ message: 'User registered successfully' });
+
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json('Internal Server Error');
+//     } finally {
+//         await client.close();
+//     }
+// });
+
+app.put('/phonesignup', async (req, res) => {
+    const client = new MongoClient(uri)
+    const formData = req.body.formData
+
+    console.log('Received FormData:', formData); 
+
+    console.log(formData)
 
     try {
-        await client.connect();
-        const database = client.db('hepy-data');
-        const users = database.collection('users');
+        await client.connect()
+        const database = client.db('hepy-data')
+        const users = database.collection('users')
+        const query = { user_id: formData.user_id }
 
-        const existingUser = await users.findOne({ email });
-
-        if (existingUser) {
-            return res.status(409).json('Email already used. Please login');
+        const updateDocument = {
+            $set: {
+                email: formData.email,
+                password: formData.password,
+                confirm_password: formData.confirm_password,
+            },
         }
 
-        const sanitizedEmail = email.toLowerCase();
+        const insertedUser = await users.updateOne(query, updateDocument)
 
-        const data = {
-            user_id: generatedUserId,
-            email: sanitizedEmail,
-            hashed_password: hashedPassword,
-            phone_number: phoneNumber
-        }
+        res.json(insertedUser)
 
-        const insertedUser = await users.insertOne(data);
-
-        const token = jwt.sign({ user_id: generatedUserId, email: sanitizedEmail }, 'your_secret_key', {
-            expiresIn: 60 * 24
-        });
-        res.cookie('UserId', generatedUserId);
-        res.status(201).json({ token, userId: generatedUserId, email: sanitizedEmail });
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).json('Internal Server Error');
     } finally {
-        await client.close();
+        await client.close()
     }
-});
+}) 
+
 
 
 app.post('/check-email-exists', async (req, res) => {
