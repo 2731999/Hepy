@@ -194,7 +194,7 @@ function Verifications() {
                     )}
                 </div>
             ) : (
-                <div className="verifyOtp">
+                <div className="verifyOtp" style={{ height: "65vh"}}>
                     <button className="otpBack" onClick={() => setShowVerification(false)}>
                         <FaAngleLeft />
                     </button>
