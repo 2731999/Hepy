@@ -77,7 +77,7 @@ const ProfileDetails = () => {
 
     return (
         <div className="profile-container">
-            <div className='scrollable-container'>
+            <div>
                 <h1>Profile Details</h1>
                 <div className="slider-container">
                     {formData.selectedImages.map((selectedImage, index) => (
