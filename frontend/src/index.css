@@ -774,11 +774,11 @@ input {
   margin: 1.5vh;
 }
 
-/* .react-outer-calendar {
+.react-outer-calendar {
   display: flex;
   align-items: center;
-  width: 93%;
-} */
+  width: 93.5%;
+}
 
 .calendarBtn {
   width: 70vw;
