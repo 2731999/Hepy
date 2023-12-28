@@ -307,13 +307,7 @@ body {
 /* ----------------------------------------------Verification page-------------------------------------------------- */
 
 .verificationPage {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 60vh;
-  max-width: 600px;
-  margin: 60px 40px;
-  padding: 0px;
   background-color: #fff;
 }
 
@@ -329,13 +323,20 @@ body {
 }
 
 
-.custom-phone-input {
+.custom-phone-input { 
   border: 1px solid #ccc;
   border-radius: 15px;
   height: 7.7vh;
   margin-top: 5vh;
-  width: 100%;
+  width: 100%; 
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.616);
+}
+
+.verContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 60px 40px;
 }
 
 .verContent h1 {
@@ -348,14 +349,6 @@ body {
   color: rgb(133, 133, 133);
   font-size: 13px;
   margin-bottom: 5vh;
-}
-
-.verifyOtp {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 30px;
-  padding-right: 30px;
 }
 
 .OTPVerify {
@@ -473,8 +466,9 @@ body {
   justify-content: center;
   gap: 10px;
   margin-bottom: 8vh;
-  width: 100%;
+  width: 90%;
   margin-top: 4vh;
+  margin-left: 15px;
 }
 
 .otp-container input {
@@ -739,6 +733,12 @@ input {
   font-size: 12px;
   text-align: center;
 }
+
+.verifyOtp {
+  padding: 25px;
+  margin: 60px 40px;
+}
+
 
 .verify-button {
   color: white;
