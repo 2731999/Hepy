@@ -350,6 +350,13 @@ body {
   margin-bottom: 5vh;
 }
 
+.verifyOtp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+}
+
 .OTPVerify {
   width: 100%;
   height: 8vh;
