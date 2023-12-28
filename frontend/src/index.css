@@ -587,12 +587,10 @@ body {
 .profile-container {
   position: relative;
   width: 100%;
-  margin-top: 30px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  margin-bottom: 20px;
 }
 
 .profileDetailFooter {
