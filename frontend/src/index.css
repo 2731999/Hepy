@@ -392,7 +392,7 @@ body {
 }
 
 .react-tel-input {
-  width: 80%;
+   width: 80% !important;
 }
 
 /* Styles for OTP Verification Page */
