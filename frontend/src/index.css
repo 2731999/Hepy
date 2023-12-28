@@ -776,6 +776,7 @@ input {
 .react-outer-calendar {
   display: flex;
   align-items: center;
+  width: 90%;
 }
 
 .calendarBtn {
