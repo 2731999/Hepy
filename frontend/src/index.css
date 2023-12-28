@@ -354,7 +354,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .OTPVerify {
