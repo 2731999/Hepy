@@ -792,7 +792,7 @@ input {
   color: rgb(255, 255, 255);
   font-size: 14px;
   font-weight: bold;
-  background-color: var(--hepygirlcolor);
+/*   background-color: var(--hepygirlcolor); */
   padding: 12px 30px;
   border-radius: 10px;
   border: none;
