@@ -27,9 +27,9 @@ const App = ({ user }) => {
         <Route path='/' element={<Home />} />
         <Route path="/Verification" element={<Verification />}/>
         {/* {authToken && <Route path="/Verification" element={<Verification />} />} */}
-        {authToken &&<Route path="/ProfileDetail" element={<ProfileDetail />} />}
+        {authToken && <Route path="/ProfileDetail" element={<ProfileDetail />} />}
         {authToken && <Route path="/Notification" element={<Notification />} />}
-        {authToken && <Route path="/AboutMePage" element={<AboutMePage />} />}
+        {authToken && <Route path="/AboutMePage" element={<AboutMePage />} />}  
         {authToken && <Route path="/Passion" element={<Passion />} />}
         {authToken && <Route path="/MorePhotos" element={<MorePhotos />} />}
         {authToken && <Route path="/InviteFriends" element={<InviteFriends />} />}

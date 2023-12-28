@@ -587,10 +587,12 @@ body {
 .profile-container {
   position: relative;
   width: 100%;
+  margin-top: 30px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   height: 100vh;
+  margin-bottom: 20px;
 }
 
 .profileDetailFooter {
@@ -790,7 +792,7 @@ input {
   color: rgb(255, 255, 255);
   font-size: 14px;
   font-weight: bold;
-/*   background-color: var(--hepygirlcolor); */
+  /* background-color: var(--hepygirlcolor); */
   padding: 12px 30px;
   border-radius: 10px;
   border: none;

@@ -188,7 +188,7 @@ function Verifications() {
                     <button className="verContinueBtn" onClick={sendOtp}>
                         Continue
                     </button>
-                    <div id="recaptcha" style={{ marginTop: '30px', marginLeft: '15px}}></div>
+                    <div id="recaptcha" style={{ marginTop: '30px', marginLeft: '10px'}}></div>
                     {phoneNumberExists && (
                         <p style={{ color: 'black' }}>{verMessage}</p>
                     )}
