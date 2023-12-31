@@ -124,6 +124,16 @@ body {
   margin-left: -21vw;
 }
 
+.home-phone-login-btn {
+  position: absolute;
+  margin-top: 38vh;
+  background-color: transparent;
+  font-size: 16px;
+  border: none;
+  color: white;
+  margin-left: -28vw;
+}
+
 .home-num-login-btn {
   position: absolute;
   margin-top: 38vh;
@@ -141,7 +151,7 @@ body {
 .auth-logo {
   width: 30%;
   padding-left: 35vw;
-  padding-top: 23vh;
+  padding-top: 22vh;
   display: flex;
   justify-items: center;
   align-items: center;
@@ -149,13 +159,13 @@ body {
 
 .auth .auth-home .authButtons {
   gap: 50px;
-  margin-top: -25vh;
+  margin-top: -20vh;
 }
 
 .auth .auth-home .primary-button {
   width: 70vw;
   height: 7vh;
-  margin-top: 34vh;
+  margin-top: 35vh;
   color: rgb(255, 255, 255);
   font-size: 15px;
   font-weight: bold;
@@ -205,7 +215,7 @@ body {
   text-align: center;
   color: white;
   font-size: 18px;
-  margin-top: 10vh;
+  margin-top: 8vh;
 }
 
 .signUp::before,
@@ -302,7 +312,76 @@ body {
   color: var(--hepygirlcolor);
 }
 
+/* --------------------------------PhoneAuthModal------------------------------- */
 
+.PhoneSignup-container {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 65vh;
+  margin-top: -80vh;
+  position: absolute;
+  border-radius: 25px;
+  z-index: 1000;
+  position: relative;
+  line-height: 1.125em;
+  text-align: center;
+}
+
+.PhoneSignupoverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.PhoneVerificationForm {
+  background-color: #fff;
+  padding-right: 20px;
+  padding-left: 20px;
+  border: none;
+}
+
+.PhoneVerificationForm h5 {
+  margin-bottom: 8px;
+  text-align: left;
+  color: gray;
+  letter-spacing: 1px;
+}
+
+.PhoneVerificationForm input {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 25px;
+  width: 90%;
+}
+
+.PhoneVerSubmitBtn {
+  height: 7vh;
+  width: 80vw;
+  margin-top: 6vh;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--hepygirlcolor);
+  padding: 12px 30px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.616);
+}
+
+.country-code-dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
 /* ----------------------------------------------Verification page-------------------------------------------------- */
 
@@ -580,6 +659,22 @@ body {
   margin-top: -5px;
 }
 
+.ver-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30vw;
+  margin-top: 40px;
+}
+
+.ver-type-btn {
+  color: white;
+  background-color: var(--hepygirlcolor);
+  border: none;
+  border-radius: 10px;
+  width: 40vw;
+  height: 4vh;
+}
 
 /* -----------------------------------------------Profile Detail----------------------------------------------------------- */
 

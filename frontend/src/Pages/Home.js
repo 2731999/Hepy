@@ -7,11 +7,13 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import Verifications from './Verification';
+import PhoneAuthModal from '../components/PhoneAuthModal';
 
 
 const Home = () => {
     const [showLoginPage, setShowLoginPage] = useState(false);
     const [emailSignupBtnOpen, setEmailSignupBtnOpen] = useState(false);
+    const [showPhoneNumberContainer, setShowPhoneNumberContainer] = useState(false); 
     const [isSignUp, setIsSignUp] = useState(true);
     const [cookies, setCookie, removeCookie] = useCookies(['AuthToken', 'UserId']);
     const navigate = useNavigate();
@@ -32,10 +34,14 @@ const Home = () => {
         setEmailSignupBtnOpen(true);
     };
 
+    const handlePhoneLoginClick = () => {
+        setShowPhoneNumberContainer(true);
+    };
+
     const handleNumberSignupClick = () => {
         navigate('/Verification')
-    };    
-    
+    };
+
     return (
         <div className='mainHome'>
             {!showLoginPage ? (
@@ -52,9 +58,12 @@ const Home = () => {
             ) : (
                 <div className='auth'>
                     <div className='auth-home'>
-                        <div onClick={handleLoginClick}>
-                            <button className='home-login-btn' >
-                                Login to continue
+                        <div className='login-btn'>
+                            <button onClick={handleLoginClick} className='home-login-btn' >
+                                Login with email
+                            </button>
+                            <button onClick={handlePhoneLoginClick} className='home-phone-login-btn' >
+                                Login with phone number
                             </button>
                         </div>
                         <div className='authLogo-container'>
@@ -83,6 +92,9 @@ const Home = () => {
             )}
             {emailSignupBtnOpen && (
                 <AuthModal setShowModal={setEmailSignupBtnOpen} isSignUp={isSignUp} />
+            )}
+             {showPhoneNumberContainer && (
+                <PhoneAuthModal setShowModal={setShowPhoneNumberContainer} isSignUp={isSignUp} />
             )}
         </div>
     );
