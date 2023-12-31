@@ -247,7 +247,6 @@ body {
   position: absolute;
   border-radius: 25px;
   z-index: 1000;
-  position: relative;
   line-height: 1.125em;
   text-align: center;
 }
