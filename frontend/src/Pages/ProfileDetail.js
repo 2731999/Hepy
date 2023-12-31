@@ -5,6 +5,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { FaMinus } from 'react-icons/fa';
 import { useCookies } from 'react-cookie';
+import img_person from '../images/img_person.png';
+
 
 
 const ProfileDetails = () => {
@@ -89,7 +91,7 @@ const ProfileDetails = () => {
                         <div className="container" key={index} onClick={() => handleImageClick(index)}>
                             <label htmlFor={`imageInput${index}`}>
                                 <img
-                                    src={selectedImage || 'path/to/default-image.jpg'}
+                                    src={selectedImage || img_person}
                                     alt={`${index}`}
                                     className="gallery-image"
                                 />
