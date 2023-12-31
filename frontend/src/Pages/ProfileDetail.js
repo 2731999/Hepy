@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import Calendar from 'react-calendar';
@@ -6,9 +6,12 @@ import 'react-calendar/dist/Calendar.css';
 import { FaMinus } from 'react-icons/fa';
 import { useCookies } from 'react-cookie';
 
+
 const ProfileDetails = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user")
     const [selectedDOB, setSelectedDOB] = useState(null);
+    const [isCameraActive, setIsCameraActive] = useState(false);
+    const videoRef = useRef(null)
     const [formData, setFormData] = useState({
         user_id: cookies.UserId,
         first_name: '',
@@ -48,7 +51,7 @@ const ProfileDetails = () => {
             console.log(err)
         }
     }
-    
+
 
     const saveDOB = () => {
         if (selectedDOB) {
@@ -65,8 +68,41 @@ const ProfileDetails = () => {
     };
 
     const handleImageClick = (index) => {
-        document.getElementById(`imageInput${index}`).click();
+        if (!isCameraActive) {
+            openCamera();
+        } else {
+            closeCamera();
+        }
     };
+
+    const openCamera = async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+          const videoElement = videoRef.current;
+    
+          if (videoElement) {
+            videoElement.srcObject = stream;
+            setIsCameraActive(true);
+          }
+        } catch (error) {
+          console.error('Error accessing the camera:', error);
+        }
+      };
+    
+      const closeCamera = () => {
+        const videoElement = videoRef.current;
+        if (videoElement && videoElement.srcObject) {
+          const stream = videoElement.srcObject;
+          const tracks = stream.getTracks();
+    
+          tracks.forEach((track) => {
+            track.stop();
+          });
+    
+          videoElement.srcObject = null;
+          setIsCameraActive(false);
+        }
+      };
 
     const toggleCalendar = () => {
         setIsCalendarOpen(!isCalendarOpen);
@@ -98,6 +134,13 @@ const ProfileDetails = () => {
                         </div>
                     ))}
                 </div>
+
+                {isCameraActive && (
+                    <div>
+                        <video ref={videoRef} autoPlay playsInline muted className="camera-video" />
+                        <button onClick={closeCamera}>Close Camera</button>
+                    </div>
+                )}
                 <form onSubmit={handleSubmit} className='form'>
                     <div className="form-group">
                         <label className='formHead'>First Name</label>
