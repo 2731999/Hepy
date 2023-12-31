@@ -157,6 +157,7 @@ const PhoneAuthModal = ({ setShowModal, isSignUp }) => {
                     type="tel"
                     id="phone"
                     name="phone"
+                    placeholder="phone number"
                     required={true}
                     onChange={(e) => setPhoneNumber(formatPhoneNumber(e.target.value))}
                     value={phoneNumber}
@@ -167,6 +168,7 @@ const PhoneAuthModal = ({ setShowModal, isSignUp }) => {
                     type="password"
                     id="password"
                     name="password"
+                    placeholder="password"
                     required={true}
                     onChange={(e) => setPassword(e.target.value)}
                 />
