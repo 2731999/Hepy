@@ -65,6 +65,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
                     type="email"
                     id="email"
                     name="email"
+                    placeholder="email"
                     required={true}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -73,6 +74,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
                     type="password"
                     id="password"
                     name="password"
+                    placeholder="password"
                     required={true}
                     onChange={(e) => setPassword(e.target.value)}
                 />
