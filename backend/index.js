@@ -182,7 +182,6 @@ app.post('/login', async (req, res) => {
         const users = database.collection('users');
 
         const user = await users.findOne({ email });
-
         if (user) {
             const correctPassword = await bcrypt.compare(password, user.hashed_password);
 
@@ -196,7 +195,37 @@ app.post('/login', async (req, res) => {
                 return res.status(201).json({ token, userId: user.user_id });
             }
         }
+        res.status(400).json('Invalid Credentials');
+    } catch (err) {
+        console.log(err);
+    } finally {
+        await client.close();
+    }
+});
 
+app.post('/phonelogin', async (req, res) => {
+    const client = new MongoClient(uri);
+    const {phone_number, password } = req.body;
+
+    try {
+        await client.connect();
+        const database = client.db('hepy-data');
+        const users = database.collection('users');
+
+        const user = await users.findOne({ phone_number });
+        if (user) {
+            const correctPassword = await bcrypt.compare(password, user.hashed_password);
+
+            if (correctPassword) {
+                const token = jwt.sign({ user_id: user.user_id, phone_number }, 'your_secret_key', {
+                    expiresIn: 60 * 24
+                });
+                res.cookie('UserId', user.user_id);
+                res.cookie('AuthToken', token);
+
+                return res.status(201).json({ token, userId: user.user_id });
+            }
+        }
         res.status(400).json('Invalid Credentials');
     } catch (err) {
         console.log(err);
