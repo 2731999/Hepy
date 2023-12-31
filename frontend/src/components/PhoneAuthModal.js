@@ -39,7 +39,7 @@ const PhoneAuthModal = ({ setShowModal, isSignUp }) => {
             }
         } catch (error) {
             console.log(error);
-            setError('An error occurred. Please try again.');
+            setError('Phone Number not exist. Please signup.');
         }
     };    
 

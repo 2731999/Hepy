@@ -5,7 +5,6 @@ import { useCookies } from 'react-cookie'
 
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
-    const [phone_number, setPhone_Number] = useState(null)
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState(null)
@@ -14,7 +13,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
 
     let navigate = useNavigate()
 
-    console.log(phone_number, email, password, confirmPassword)
+    console.log(email, password, confirmPassword)
 
     const handleClick = () => {
         setShowModal(false)
@@ -28,7 +27,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
                 return;
             }
 
-            const response = await axios.post(`https://hepy-backend.vercel.app/${isSignUp ? 'signup' : 'login'}`, { email, phone_number, password });
+            const response = await axios.post(`https://hepy-backend.vercel.app/${isSignUp ? 'signup' : 'login'}`, { email, password });
 
             setCookie('AuthToken', response.data.token);
             setCookie('UserId', response.data.userId);
