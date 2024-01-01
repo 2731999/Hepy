@@ -271,6 +271,8 @@ body {
   padding-right: 20px;
   padding-left: 20px;
   border: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .emailVerificationForm h5 {
@@ -408,8 +410,8 @@ body {
   border-radius: 15px;
   height: 7.7vh;
   margin-top: 5vh;
-  width: 106.7%;
-  margin-left: -1.5vh;
+  width: 106.5%;
+  margin-left: -1vh;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.616);
 }
 
@@ -922,11 +924,13 @@ input {
   color: var(--hepygirlcolor);
 }
 
-.error-message {
+.profile-error-message {
   margin-top: 15vh;
 }
 
+
 /* ------------------------------------------------Notification---------------------------------------------------- */
+
 
 .notification-page {
   display: flex;
@@ -993,6 +997,7 @@ input {
   align-items: center;
   width: 100%;
 }
+
 
 
 /* -----------------------------------------------About me---------------------------------------------------------- */
@@ -1154,6 +1159,7 @@ input {
   flex-direction: column;
   font-size: 13px;
   color: gray;
+  margin-top: 4vh;
 }
 
 .passionP {
@@ -1267,9 +1273,18 @@ input {
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.616);
   font-size: 15px;
   margin-left: 2vw;
-  margin-top: 1vh;
+  margin-top: 2vh;
 }
 
+.passion-fotter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.passion-error-message {
+  margin-top: 2vh;
+}
 
 
 /* ---------------------------------------------------Invite friends--------------------------------------------- */
