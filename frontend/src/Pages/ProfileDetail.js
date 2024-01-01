@@ -7,8 +7,6 @@ import { FaMinus } from 'react-icons/fa';
 import { useCookies } from 'react-cookie';
 import img_person from '../images/img_person.png';
 
-
-
 const ProfileDetails = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user")
     const [selectedDOB, setSelectedDOB] = useState(null);
