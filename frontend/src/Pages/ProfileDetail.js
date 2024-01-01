@@ -7,6 +7,8 @@ import { FaMinus } from 'react-icons/fa';
 import { useCookies } from 'react-cookie';
 import img_person from '../images/img_person.png';
 
+
+
 const ProfileDetails = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user")
     const [selectedDOB, setSelectedDOB] = useState(null);
@@ -17,7 +19,7 @@ const ProfileDetails = () => {
         selectedImages: [null],
         DOB: selectedDOB,
     });
-
+    const [error, setError] = useState('');
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
     const handleInputChange = (e) => {
@@ -40,15 +42,22 @@ const ProfileDetails = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        try {
-            const response = await axios.put('https://hepy-backend.vercel.app/user', { formData })
-            const success = response.status === 200
-            if (success) navigate('/Notification')
-        } catch (err) {
-            console.log(err)
+        e.preventDefault();
+        if (!formData.first_name || !formData.last_name || !formData.DOB) {
+            setError('Please fill in all required details.');
+            return;
         }
-    }
+        try {
+            const response = await axios.put('https://hepy-backend.vercel.app/user', { formData });
+            const success = response.status === 200;
+
+            if (success) {
+                navigate('/Notification');
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
 
     const saveDOB = () => {
@@ -126,6 +135,7 @@ const ProfileDetails = () => {
                     </div>
                 </form>
             </div>
+            {error && <div className="error-message">{error}</div>}
             <div className='profileDetailFooter'>
                 <div className='profilePhara'>
                     <p>Only your initials will be shown to users.</p>
