@@ -922,6 +922,9 @@ input {
   color: var(--hepygirlcolor);
 }
 
+.error-message {
+  margin-top: 20vh;
+}
 
 /* ------------------------------------------------Notification---------------------------------------------------- */
 
