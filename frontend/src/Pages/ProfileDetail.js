@@ -135,7 +135,7 @@ const ProfileDetails = () => {
                     </div>
                 </form>
             </div>
-            {error && <div className="error-message">{error}</div>}
+            {error && <div className="profile-error-message">{error}</div>}
             <div className='profileDetailFooter'>
                 <div className='profilePhara'>
                     <p>Only your initials will be shown to users.</p>
