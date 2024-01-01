@@ -9,7 +9,8 @@ const Passion = () => {
   const passionOptions = ['Shopping', 'Karaoke', 'Photography', 'Yoga', 'Reading', 'Writing', 'Music', 'Travel'];
   const otherOptions = ['Smoking', 'Drinking', 'Children', 'Height', 'Language', 'Distance'];
   const [cookies, setCookie, removeCookie] = useCookies("user2")
-  const [formData, setFormData] = useState({user_id: cookies.UserId,});
+  const [formData, setFormData] = useState({ user_id: cookies.UserId, });
+  const [error, setError] = useState('');
 
   const halfLength = Math.ceil(passionOptions.length / 2);
   const firstRowOptions = passionOptions.slice(0, halfLength);
@@ -24,11 +25,16 @@ const Passion = () => {
   };
 
   const handlePassionClick = async () => {
+    if (selectedpassions.length < 3) {
+      setError('Please select at least 3 options.');
+      return;
+    }
+
     try {
       const response = await axios.put('https://hepy-backend.vercel.app/user2', {
         formData: {
           user_id: formData.user_id,
-          passions: selectedpassions, 
+          passions: selectedpassions,
         },
       });
       const success = response.status === 200;
@@ -39,6 +45,7 @@ const Passion = () => {
       console.log(err);
     }
   };
+
 
   useEffect(() => {
     const rootElement = document.documentElement;
@@ -61,7 +68,7 @@ const Passion = () => {
   };
 
   const handleAboutmeArrowClick = () => {
-    window.location.href ='/AboutMePage';
+    window.location.href = '/AboutMePage';
   };
 
   let navigate = useNavigate()
@@ -69,7 +76,7 @@ const Passion = () => {
   return (
     <div className="Passion">
       <header className="passionHeader">
-        <div className="passionArrow" onClick={handleAboutmeSkipClick}><FaAngleLeft/></div>
+        <div className="passionArrow" onClick={handleAboutmeSkipClick}><FaAngleLeft /></div>
         <div className="passionSkip" onClick={handleAboutmeArrowClick}>Skip</div>
       </header>
       <div>
@@ -92,8 +99,8 @@ const Passion = () => {
             </label>
           ))}
         </div>
-        <div className="passion-options-inner-container"> 
-          {secondRowOptions.map((option, idx  ) => (
+        <div className="passion-options-inner-container">
+          {secondRowOptions.map((option, idx) => (
             <label
               key={idx}
               className={`passion-option-label ${selectedpassions.includes(option) ? 'active' : ''}`}
@@ -117,18 +124,21 @@ const Passion = () => {
             <input
               type="checkbox"
               checked={selectedpassions.includes(option)}
-              onChange={() => handlepassionToggle(option)}  
+              onChange={() => handlepassionToggle(option)}
             />
             {option}
           </label>
         ))}
-        <div className='passionPhara2'>
-          <p className='passionP'>We understand that your likes and dislikes can change over time.</p>
-          <p>You can change this information later on.</p>
+        <div className='passion-footer'>
+          <div className='passionPhara2'>
+            <p className='passionP'>We understand that your likes and dislikes can change over time.</p>
+            <p>You can change this information later on.</p>
+          </div>
+          <button className="passion-continue-button" onClick={handlePassionClick}>
+            Continue
+          </button>
+          {error && <div className="passion-error-message">{error}</div>}
         </div>
-        <button className="passion-continue-button" onClick={handlePassionClick}>
-          Continue
-        </button>
       </div>
     </div>
   );
