@@ -10,6 +10,7 @@ const GenderSelector = () => {
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies("user1")
   const [formData, setFormData] = useState({user_id: cookies.UserId,});
+  const [error, setError] = useState('');
 
 
   const handleGenderClick = (gender) => {
@@ -32,11 +33,15 @@ const GenderSelector = () => {
 
   const handleContinueClick = async (e) => {
     e.preventDefault();
+    if (!selectedGender || selectedInterests.length === 0) {
+      setError('Please select both gender and interests.');
+      return;
+    }
     try {
       const response = await axios.put('https://hepy-backend.vercel.app/user1', {
         formData: {
           user_id: formData.user_id,
-          gender: selectedGender, 
+          gender: selectedGender,
           interests: selectedInterests.join(',')
         },
       });
@@ -89,6 +94,7 @@ const GenderSelector = () => {
           <button className="continue-button" onClick={handleContinueClick}>
             Continue
           </button>
+          {error && <div className="error-message">{error}</div>}
         </div>
       </div>
     </div>
