@@ -93,7 +93,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
                 )}
             </form>
             <div className='auth-footer'>
-                <button className="emailVerSubmitBtn">Submit</button>
+                <button className="emailVerSubmitBtn" onClick={handleSubmit}>Submit</button>
                 <p>{error}</p>
             </div>
         </div>
