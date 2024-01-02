@@ -20,7 +20,6 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             if (isSignUp && (password !== confirmPassword)) {
                 setError('Passwords need to match!');
@@ -41,7 +40,12 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
             window.location.reload();
 
         } catch (error) {
-            console.log(error);
+            console.log('Error:', error);
+
+            if (error.response) {
+                console.log('Response Status:', error.response.status);
+                console.log('Response Data:', error.response.data);
+            }
 
             if (error.response.status === 400) {
                 setError('Invalid email or password. Please try again.');
@@ -91,11 +95,11 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
                         />
                     </div>
                 )}
+                <div className='auth-footer'>
+                    <button type="submit" className="emailVerSubmitBtn">Submit</button>
+                    <p>{error}</p>
+                </div>
             </form>
-            <div className='auth-footer'>
-                <button className="emailVerSubmitBtn" onClick={handleSubmit}>Submit</button>
-                <p>{error}</p>
-            </div>
         </div>
     )
 }
