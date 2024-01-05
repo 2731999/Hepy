@@ -10,7 +10,7 @@ function SuperLikeBox({ user }) {
 
   return (
     <div className={`super-like-box ${superLiked ? 'super-liked' : ''}`} onClick={handleSuperLikeClick}>
-      {superLiked ? 'Super Liked!' : 'Super Like'}
+      {superLiked ? '-!' : '-'}
     </div>
   );
 }

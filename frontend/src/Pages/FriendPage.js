@@ -4,11 +4,13 @@ import { useLocation } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 import { FaUserAlt } from 'react-icons/fa';
 import { FaClone } from 'react-icons/fa';
-import GirlDp from '../images/GirlDp.png';
 import { FaHeart } from 'react-icons/fa';
 import { FaTimes } from 'react-icons/fa';
 import { CiLocationOn } from 'react-icons/ci';
 import { FiSend } from 'react-icons/fi';
+import male_logo from '../images/male_logo.png'; 
+import female_logo from '../images/female_logo.png'; 
+
 
 const FriendPage = () => {
     const location = useLocation();
@@ -78,7 +80,7 @@ const FriendPage = () => {
             <div className="friend-profile-container">
                 <div className="friend-profile-picture">
                     <div className="friend-picture">
-                        <img src={clickedProfile?.user?.Pic[0]} alt="User Profile" />
+                    <img src={clickedProfile?.user?.Pic[0] || (clickedProfile?.user?.gender === 'male' ? male_logo : female_logo)} alt="User Profile" />
                     </div>
                     <div className="friend-circles-picture">
                         <div className="friend-first-circle"><FaTimes /></div>

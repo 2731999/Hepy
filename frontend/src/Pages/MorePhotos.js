@@ -10,6 +10,7 @@ const UploadPhotosComponent = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user3");
     const [formData, setFormData] = useState({ user_id: cookies.UserId });
     const [pic, setPic] = useState([]);
+    const [error, setError] = useState('');
 
     const handleFileChange = async (event, index) => {
         try {
@@ -23,8 +24,8 @@ const UploadPhotosComponent = () => {
                     data.append("file", file);
                     data.append("upload_preset", "Hepy-App");
                     data.append("cloud_name", "dbqu0itdj");
-                    const response = await fetch(    
-                        "https://api.cloudinary.com/v1_1/dbqu0itdj/image/upload",
+                    const response = await fetch(
+                        " ",
                         {
                             method: "POST",
                             body: data,
@@ -40,7 +41,7 @@ const UploadPhotosComponent = () => {
             const imageUrls = await Promise.all(promises);
 
             setPic(imageUrls);
-            console.log(imageUrls); 
+            console.log(imageUrls);
             setselectedPic(newselectedPic);
         } catch (err) {
             console.error(err);
@@ -49,14 +50,17 @@ const UploadPhotosComponent = () => {
 
     const handlePhotosContinue = async (e) => {
         e.preventDefault();
+        if (pic.length < 1) {
+            setError('Please select at least 1 photo.');
+            return;
+        }
         try {
             const response = await axios.put('https://hepy-backend.vercel.app/user3', {
                 formData: {
                     user_id: formData.user_id,
-                    pic: pic, 
+                    pic: pic,
                 },
             });
-    
             const success = response.status === 200;
             if (success) {
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
@@ -67,7 +71,6 @@ const UploadPhotosComponent = () => {
             console.error(error);
         }
     };
-    
 
     let navigate = useNavigate();
 
@@ -88,7 +91,7 @@ const UploadPhotosComponent = () => {
                                 key={index}
                                 index={index}
                                 onChange={(e) => handleFileChange(e, index)}
-                                selectedImage={selectedPic[index]} 
+                                selectedImage={selectedPic[index]}
                             />
                         ))}
                     </div>
@@ -97,6 +100,7 @@ const UploadPhotosComponent = () => {
             <button className="photos-continue-button" onClick={handlePhotosContinue}>
                 Continue
             </button>
+            {error && <div className="photos-error-message">{error}</div>}
         </div>
     );
 };

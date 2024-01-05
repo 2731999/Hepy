@@ -1495,6 +1495,10 @@ input {
   cursor: pointer;
 }
 
+.photos-error-message {
+  margin-top: 2vh;
+}
+
 
 /* -----------------------------------------------------Questions Options page--------------------------------------- */
 

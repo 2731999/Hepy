@@ -5,8 +5,6 @@ import { Country } from "country-state-city";
 import DiscoverCard from '../components/Discovercard';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import GirlDp from '../images/GirlDp.png';
-import abhi from '../images/abhi.jpg';
 import Select from 'react-select';
 import { FaMinus } from 'react-icons/fa';
 import '../index3.css';

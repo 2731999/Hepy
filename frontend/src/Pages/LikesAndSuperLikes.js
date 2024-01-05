@@ -71,8 +71,8 @@ const LikesAndSuperLikes = () => {
 
     console.log('liked profiles', likedUsers)
 
-    const handleFriendPageClick = () => {
-        window.location.href = '/FriendPage';
+    const handleDiscoverClick = () => {
+        window.location.href = '/Discover';
     };
     const handleSelfClick = () => {
         window.location.href = '/Self';
@@ -113,7 +113,7 @@ const LikesAndSuperLikes = () => {
             </div>
             <footer className={`likes-and-superlikes-footer${isChatOpen ? ' sticky' : ''}`}>
                 <div className="likes-and-superlikes-footer-icons">
-                    <a href="#" className="likes-and-superlikes-footer-icon" onClick={handleFriendPageClick}>
+                    <a href="#" className="likes-and-superlikes-footer-icon" onClick={handleDiscoverClick}>
                         <FaClone />
                     </a>
                     <a href="#" className="likes-and-superlikes-footer-icon" onClick={handleMessagesPageClick}>

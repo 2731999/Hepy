@@ -34,7 +34,7 @@ const GenderSelector = () => {
   const handleContinueClick = async (e) => {
     e.preventDefault();
     if (!selectedGender || selectedInterests.length === 0) {
-      setError('Please select both gender and interests.');
+      setError('Please select your gender and interests.');
       return;
     }
     try {

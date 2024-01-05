@@ -459,6 +459,7 @@
   padding: 25px;
   background-color: rgb(255, 228, 228);
   padding-bottom: 0px;
+  width: 87%;
 }
 
 .self-profile-container {
@@ -987,7 +988,7 @@ hr {
   text-align: center;
   padding: 20px 0;
   position: sticky;
-  bottom: 0; 
+  bottom: 0;
   z-index: 999;
   width: 115%;
   margin-bottom: -50px;
@@ -1420,10 +1421,9 @@ hr {
 /* LikedUsers.css */
 
 .likes-main {
-  padding-top: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .likes-main-head {
@@ -1555,7 +1555,6 @@ hr {
   position: sticky;
   bottom: 0;
   z-index: 2;
-  margin-top: 12vh;
 }
 
 .likes-and-superlikes-footer.sticky {

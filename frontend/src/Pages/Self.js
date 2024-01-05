@@ -12,6 +12,9 @@ import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom';
 import { MdDarkMode } from 'react-icons/md';
 import { BsBrightnessHighFill } from 'react-icons/bs';
+import male_logo from '../images/male_logo.png';
+import female_logo from '../images/female_logo.png';
+
 
 function calculateAge(dob) {
     const dobDate = new Date(dob);
@@ -213,7 +216,14 @@ const Self = () => {
             <div className={`self-profile-container${isDarkMode ? ' dark' : ''}`}>
                 <div className="self-profile-picture">
                     <div className={`self-picture${isDarkMode ? ' dark' : ''}`}>
-                        <img src={selfUserDetails?.profilePicture} alt="User Profile" />
+                        {selfUserDetails?.profilePicture ? (
+                            <img src={selfUserDetails?.profilePicture} alt="User Profile" />
+                        ) : (
+                            <img
+                                src={user?.gender === 'male' ? male_logo : female_logo}
+                                alt={`Default ${user?.gender === 'male' ? 'Male' : 'Female'} Profile`}
+                            />
+                        )}
                     </div>
                     <div className={`self-profile-info${isDarkMode ? ' dark' : ''}`}>
                         <p className="self-user-info">{selfUserDetails?.firstLetterFirstName}</p>
