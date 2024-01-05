@@ -30,7 +30,7 @@ const App = ({ user }) => {
         {authToken && <Route path="/ProfileDetail" element={<ProfileDetail />} />}
         {authToken && <Route path="/Notification" element={<Notification />} />}
         {authToken && <Route path="/AboutMePage" element={<AboutMePage />} />}  
-        { <Route path="/Passion" element={<Passion />} />}
+        {authToken && <Route path="/Passion" element={<Passion />} />}
         {authToken && <Route path="/MorePhotos" element={<MorePhotos />} />}
         {authToken && <Route path="/InviteFriends" element={<InviteFriends />} />}
         {authToken && <Route path="/QuestionsPage" element={<QuestionsPage />} />}

@@ -161,31 +161,37 @@ function Discover() {
               <div className="discover-filter-icon" onClick={togglediscoverFilter}>
                 <TbAdjustmentsHorizontal />
               </div>
-            </div> 
+            </div>
           </header>
           <main className="discover-card-main">
-            <div className="card-stack">
-              {genderedUsers?.map((genderedUser, index) => {
-                const userImage = genderedUser.Pic && genderedUser.Pic[0];
-                const dob = genderedUser.DOB;
-                const userAge = dob ? calculateAge(dob) : null;
+            {genderedUsers.length > 0 ? (
+              <div className="card-stack">
+                {genderedUsers?.map((genderedUser, index) => {
+                  const userImage = genderedUser.Pic && genderedUser.Pic[0];
+                  const dob = genderedUser.DOB;
+                  const userAge = dob ? calculateAge(dob) : null;
 
-                return (
-                  <div key={genderedUser.user_id} className="card-stack-item">
-                    <DiscoverCard
-                      name={`${genderedUser.first_name} ${genderedUser.last_name}`}
-                      age={userAge}
-                      imageSrc={userImage}
-                      onSwipe={(dir) => {
-                        swiped(dir, genderedUser.user_id);
-                        setIsChatOpen(false);
-                      }}
-                      zIndex={cardOrder.length - index}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+                  return (
+                    <div key={genderedUser.user_id} className="card-stack-item">
+                      <DiscoverCard
+                        name={`${genderedUser.first_name} ${genderedUser.last_name}`}
+                        age={userAge}
+                        imageSrc={userImage}
+                        onSwipe={(dir) => {
+                          swiped(dir, genderedUser.user_id);
+                          setIsChatOpen(false);
+                        }}
+                        zIndex={cardOrder.length - index}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="no-more-profiles-message">
+                No more profiles to show
+              </div>
+            )}
           </main>
           <div className="discover-circle-icons">
             <div className="discover-circle-icon" onClick={handleLeftSwipe}>
