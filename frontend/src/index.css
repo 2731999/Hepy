@@ -1129,7 +1129,7 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   background-color: transparent;
 }
 
@@ -1166,7 +1166,7 @@ input {
   flex-direction: column;
   font-size: 13px;
   color: gray;
-  margin-top: 4vh;
+  margin-top: 3vh;
 }
 
 .passionP {

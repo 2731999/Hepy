@@ -10,7 +10,6 @@ const UploadPhotosComponent = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user3");
     const [formData, setFormData] = useState({ user_id: cookies.UserId });
     const [pic, setPic] = useState([]);
-    const [error, setError] = useState('');
 
     const handleFileChange = async (event, index) => {
         try {
@@ -50,10 +49,6 @@ const UploadPhotosComponent = () => {
 
     const handlePhotosContinue = async (e) => {
         e.preventDefault();
-        if (pic.length < 1) {
-            setError('Please select at least 1 photo.');
-            return;
-        }
         try {
             const response = await axios.put('https://hepy-backend.vercel.app/user3', {
                 formData: {
@@ -100,7 +95,6 @@ const UploadPhotosComponent = () => {
             <button className="photos-continue-button" onClick={handlePhotosContinue}>
                 Continue
             </button>
-            {error && <div className="photos-error-message">{error}</div>}
         </div>
     );
 };
