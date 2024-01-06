@@ -220,8 +220,8 @@ const Self = () => {
                             <img src={selfUserDetails?.profilePicture} alt="User Profile" />
                         ) : (
                             <img
-                                src={user?.gender === 'male' ? male_logo : female_logo}
-                                alt={`Default ${user?.gender === 'male' ? 'Male' : 'Female'} Profile`}
+                                src={user?.Gender === 'Woman' ? female_logo : male_logo}
+                                alt={`Default ${user?.Gender === 'Woman' ? 'Female' : 'Male'} Profile`}
                             />
                         )}
                     </div>

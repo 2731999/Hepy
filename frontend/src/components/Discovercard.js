@@ -17,15 +17,15 @@ const DiscoverCard = ({ user, name, age, imageSrc, onSwipe }) => {
   const firstLetter = firstName ? firstName[0] : '';
   const lastLetter = lastName ? lastName[0] : '';
 
-  const defaultImage = user && user.gender === 'male' ? male_logo : female_logo;
+  // const defaultImage = user && user.Gender === 'Woman' ? female_logo : male_logo;
 
   return (
     <div className='outer-discover-card'>
       <div className="discover-card">
         <div className="discover-card-img">
           <img
-            src={imageSrc || defaultImage}
-            alt={'Photo of ' + name}
+            src={imageSrc}
+            alt={""}
           />
         </div>
         <div className="discover-card-details">
