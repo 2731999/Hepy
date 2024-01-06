@@ -46,9 +46,9 @@
     width: 80vw;
     border-radius: 20px;
     border: 1px solid #ccc;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.603);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.199);
     position: absolute;
-    background-color: rgb(196, 196, 196);
+    background-color: rgb(240, 240, 240);
 }
 
 .discover-card::after {
