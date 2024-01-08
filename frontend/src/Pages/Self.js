@@ -319,7 +319,6 @@ const Self = () => {
                 <div className="self-interests">
                     <div className='self-intrests-head'>
                         <h2>Interests</h2>
-                        <button className={`edit-interests-button${isDarkMode ? ' dark' : ''}`}>Edit</button>
                     </div>
                     <div className="self-small-interest-boxes">
                         {interests.map((interest, index) => (
