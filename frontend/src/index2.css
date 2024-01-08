@@ -172,6 +172,7 @@
 .name-age {
   display: flex;
   align-items: center;
+  margin-left: -4px;
 }
 
 .message-received {
@@ -192,7 +193,7 @@
   gap: 5vw;
   color: white;
   margin-top: 15px;
-  margin-left: -4px;
+  margin-left: -10px;
 }
 
 .message-menu {
