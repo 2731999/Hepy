@@ -1374,12 +1374,12 @@ hr {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 4px 2px;
+  padding: 4px 6px;
   margin-right: 10px;
   margin-bottom: 10px;
   font-size: 11px;
   cursor: pointer;
-  width: 79px;
+  width: 64px;
 }
 
 /* --------friendPage Footer---------- */
