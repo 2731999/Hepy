@@ -16,7 +16,7 @@ function UsersLiked({ user }) {
     <div className={`like-box ${liked ? 'liked' : ''} ${blurEnabled ? 'blurred' : ''}`} onClick={handleLikeClick}>
       <img
         src={user.Pic[0]}
-        alt={`Profile of ${user.first_name}`}
+        alt={`${user.first_name}`}
         style={{ width: '100%', height: '100%', objectFit: 'cover', marginTop: '20px', borderRadius:'15px' }}
       />
       {blurEnabled && (

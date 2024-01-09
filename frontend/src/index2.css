@@ -481,7 +481,7 @@
 .self-picture {
   width: 87vw;
   height: 50vh;
-  margin-right: -315px;
+  margin-right: -310px;
   display: flex;
   align-items: flex-start;
   overflow: hidden;
@@ -1048,7 +1048,7 @@ hr {
 }
 
 .friend-picture {
-  width: 86vw;
+  width: 88vw;
   height: 50vh;
   margin-right: -300px;
   display: flex;
@@ -1070,7 +1070,7 @@ hr {
 }
 
 .friend-picture img {
-  width: 100%;
+  width: 99%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
@@ -1374,12 +1374,12 @@ hr {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 4px 6px;
+  padding: 4px 2px;
   margin-right: 10px;
   margin-bottom: 10px;
   font-size: 11px;
   cursor: pointer;
-  width: 64px;
+  width: 79px;
 }
 
 /* --------friendPage Footer---------- */

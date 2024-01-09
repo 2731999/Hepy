@@ -6,11 +6,38 @@ import axios from 'axios';
 
 const Passion = () => {
   const [selectedpassions, setSelectedpassions] = useState([]);
-  const passionOptions = ['Shopping', 'Karaoke', 'Photography', 'Yoga', 'Reading', 'Writing', 'Music', 'Travel'];
-  const otherOptions = ['Smoking', 'Drinking', 'Children', 'Height', 'Language', 'Distance'];
   const [cookies, setCookie, removeCookie] = useCookies("user2")
   const [formData, setFormData] = useState({ user_id: cookies.UserId, });
   const [error, setError] = useState('');
+  const passionOptions = ['Shopping', 'Karaoke', 'Photography', 'Yoga', 'Reading', 'Writing', 'Music', 'Travel'];
+  const otherOptions = ['Smoking', 'Drinking', 'Children', 'Height', 'Language', 'Distance'];
+  const additionalOptions = [
+    'Exercise and fitness',
+    'Cooking and trying new recipes',
+    'Travelling and expolring new places',
+    'Reading and books club discussions',
+    'Outdoor activities such as hiking, biking and camping',
+    'Photography and capturing special moments',
+    'Trying new restaurants and discovering different cuisines',
+    'Gardening and cultivating plants',
+    'Yoga and meditation for relaxation and mindfulness',
+    'Art and creativity, such as painting or pottery',
+    'Attending live music concert and festivals',
+    'Volunteering and giving back to the community',
+    'Fashion and personal style',
+    'DIY projects and home improvement',
+    'Watching and discussing movies and TV shows',
+    'Socializing and spending time with friends and loved onces',
+    'Personal developent and self improvement',
+    'Writing and journaling',
+    'Interiror design and home decor',
+    'Mindfulness and practicing gratitude',
+    'Pets and animal welfaree',
+    'Wine testing and exploring different types of wine',
+    'Sustainable living and eco friendly practices',
+    'Collectinf and trading various items or objects',
+    'Fashion blogging and keeping up with the latest trends',
+  ];
 
   const halfLength = Math.ceil(passionOptions.length / 2);
   const firstRowOptions = passionOptions.slice(0, halfLength);
@@ -129,18 +156,36 @@ const Passion = () => {
             {option}
           </label>
         ))}
-        <div className='passion-footer'>
-          <div className='passionPhara2'>
-            <p className='passionP'>We understand that your likes and dislikes can change over time.</p>
-            <p>You can change this information later on.</p>
-          </div>
-          <button className="passion-continue-button" onClick={handlePassionClick}>
-            Continue
-          </button>
-          {error && <div className="passion-error-message">{error}</div>}
+      </div>
+      <div className='passion-content'>
+        <div className='passion-additional-options'>
+          {additionalOptions.map((option, idx) => (
+            <label
+              key={idx + otherOptions.length}
+              className={`additional-option-label ${selectedpassions.includes(option) ? 'active' : ''}`}
+            >
+              <input
+                type="checkbox"
+                checked={selectedpassions.includes(option)}
+                onChange={() => handlepassionToggle(option)}
+              />
+              {option}
+            </label>
+          ))}
         </div>
       </div>
+      <div className='passion-footer'>
+        <div className='passionPhara2'>
+          <p className='passionP'>We understand that your likes and dislikes can change over time.</p>
+          <p>You can change this information later on.</p>
+        </div>
+        <button className="passion-continue-button" onClick={handlePassionClick}>
+          Continue
+        </button>
+        {error && <div className="passion-error-message">{error}</div>}
+      </div>
     </div>
+
   );
 };
 
