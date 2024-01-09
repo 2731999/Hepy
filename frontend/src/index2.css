@@ -797,12 +797,12 @@ hr {
   color: black;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 4px 6px;
+  padding: 4px 5px;
   margin-right: 10px;
   margin-bottom: 10px;
-  font-size: 11.5px;
+  font-size: 11px;
   cursor: pointer;
-  width: 70px;
+  width: 66px;
 }
 
 .self-vertical-buttons-container {
