@@ -701,7 +701,6 @@ body {
   left: 0;
   right: 0;
   background-color: #fff;
-  padding-bottom: 35px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
