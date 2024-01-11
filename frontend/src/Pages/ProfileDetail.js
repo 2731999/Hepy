@@ -130,7 +130,6 @@ const ProfileDetails = () => {
                     </div>
                 </form>
             </div>
-            {error && <div className="profile-error-message">{error}</div>}
             <div className='profileDetailFooter'>
                 <div className='profilePhara'>
                     <p>Only your initials will be shown to users.</p>
@@ -141,6 +140,7 @@ const ProfileDetails = () => {
                 <button type="submit" className="verify-button" onClick={handleSubmit}>
                     Verify
                 </button>
+                {error && <div className="profile-error-message">{error}</div>}
             </div>
         </div>
     );
