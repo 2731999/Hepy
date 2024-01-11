@@ -17,11 +17,13 @@ import female_logo from '../images/female_logo.png';
 
 
 function calculateAge(dob) {
-    const dobDate = new Date(dob);
+    const [day, month, year] = dob.split('/');
+    const dobDate = new Date(`${month}/${day}/${year}`);
     const currentDate = new Date();
     const age = currentDate.getFullYear() - dobDate.getFullYear();
     return age;
 }
+
 
 const Self = () => {
 
