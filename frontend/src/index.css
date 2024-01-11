@@ -697,8 +697,7 @@ body {
 }
 
 .profileDetailFooter {
-  position: fixed;
-  bottom: 0;
+  margin-top: 11vh;
   left: 0;
   right: 0;
   background-color: #fff;
@@ -839,101 +838,108 @@ input {
   font-size: 15px;
 }
 
-.bottom-button-container {
-  text-align: center;
-}
+/* -------------------------------Canlendar-------------- */
 
-.calendar-toggle-button {
-  position: absolute;
-  margin-left: -11px;
-  background-color: transparent;
-  color: var(--hepygirlcolor);
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 20px;
-  font-weight: bold;
-}
+/* test.css */
 
-.calendar-container {
-  margin-top: -65vh;
-  z-index: 1000;
+.custom-calendar {
+  margin: auto;
   position: relative;
-  width: 100%;
-  background: white;
-  border: 1px solid #a0a096;
-  line-height: 1.125em;
-  text-align: center;
 }
 
-.react-calendar {
-  max-width: 100%;
-  height: 50vh;
-  margin-left: 10px;
-  background: white;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.125em;
-  border-color: white;
-  margin: 1.5vh;
+.date-input-container {
+  position: relative;
 }
 
-.react-outer-calendar {
-  display: flex;
-  align-items: center;
-  width: 93.5%;
+.date-input-container input {
+  padding: 25px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  height: 0px;
+  width: 81vw;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.616);
 }
 
-.calendarBtn {
-  width: 70vw;
-  height: 7vh;
-  color: rgb(255, 255, 255);
-  font-size: 14px;
-  font-weight: bold;
-  background-color: var(--hepygirlcolor);
-  padding: 12px 30px;
-  border-radius: 10px;
-  border: none;
-  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.616);
-  margin-bottom: 7vh;
-}
-
-.pdoverlay {
-  position: fixed;
-  top: 0;
+.date-picker {
+  position: absolute;
+  top: 100%;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 99%;
+  border-radius: 15px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--hepygirlcolor);
+  border-bottom: 1px solid #ccc;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.dropdown {
+  flex: 1;
+  margin-right: 10px;
 }
 
 
-.react-calendar,
-.react-calendar *,
-.react-calendar *:before,
-.react-calendar *:after {
+.dropdown select {
+  width: 90%;
   box-sizing: border-box;
-  border: none;
-  font-size: 16px;
+  cursor: pointer;
+  height: 4vh;
+  border-radius: 10px;
 }
 
-.react-calendar__navigation button {
-  min-width: 44px;
-  background: none;
-  color: var(--hepygirlcolor);
+.dropdown select option {
+  font-size: 10px;
 }
 
-.react-calendar__month-view__weekdays {
-  text-align: center;
-  text-transform: uppercase;
+.calendar-header select {
+  font-size: 12px; 
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   font-weight: bold;
-  font-size: 0.75em;
-  color: var(--hepygirlcolor);
+  text-align: center;
+  margin-top: 1vh;
 }
 
-.profile-error-message {
-  margin-top: 15vh;
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
+
+.calendar-grid div {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.inactive {
+  color: #ccc;
+}
+
+.selected {
+  background-color: var(--hepygirlcolor);
+  color: white;
+  border-radius: 50px;
+}
+
+.selected-date {
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+
 
 
 /* ------------------------------------------------Notification---------------------------------------------------- */

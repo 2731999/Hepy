@@ -790,7 +790,6 @@ hr {
 .self-small-interest-boxes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .self-small-interest-box {

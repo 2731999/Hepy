@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-import Calendar from 'react-calendar';
+// import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { FaMinus } from 'react-icons/fa';
 import { useCookies } from 'react-cookie';
 import img_person from '../images/img_person.png';
-
-
+import Calendar from '../components/Calendar'
 
 const ProfileDetails = () => {
     const [cookies, setCookie, removeCookie] = useCookies("user")
@@ -43,10 +42,16 @@ const ProfileDetails = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!formData.first_name || !formData.last_name || !formData.DOB) {
             setError('Please fill in all required details.');
             return;
         }
+
+        console.log("First Name:", formData.first_name);
+        console.log("Last Name:", formData.last_name);
+        console.log("DOB:", formData.DOB);
+
         try {
             const response = await axios.put('https://hepy-backend.vercel.app/user', { formData });
             const success = response.status === 200;
@@ -59,20 +64,6 @@ const ProfileDetails = () => {
         }
     };
 
-
-    const saveDOB = () => {
-        if (selectedDOB) {
-            const localMidnightDOB = new Date(
-                Date.UTC(selectedDOB.getFullYear(), selectedDOB.getMonth(), selectedDOB.getDate(), 0, 0, 0)
-            );
-
-            setFormData({
-                ...formData,
-                DOB: localMidnightDOB.toISOString(),
-            });
-        }
-        setIsCalendarOpen(false);
-    };
 
     const handleImageClick = (index) => {
         const fileInput = document.getElementById(`imageInput${index}`);
@@ -133,6 +124,10 @@ const ProfileDetails = () => {
                             className='form-group-textarea'
                         />
                     </div>
+                    <div className="form-group">
+                        <label className='formHead'>Date of Birth</label>
+                        <Calendar dob={formData.DOB} onDateSelect={(date) => setFormData({ ...formData, DOB: date })} />
+                    </div>
                 </form>
             </div>
             {error && <div className="profile-error-message">{error}</div>}
@@ -146,28 +141,6 @@ const ProfileDetails = () => {
                 <button type="submit" className="verify-button" onClick={handleSubmit}>
                     Verify
                 </button>
-                {isCalendarOpen && (
-                    <div className="pdoverlay" onClick={toggleCalendar}></div>
-                )}
-                {isCalendarOpen ? (
-                    <div className="calendar-container" style={{ borderTopLeftRadius: '25px', borderTopRightRadius: '25px' }}>
-                        <div>
-                            <div className='react-outer-calendar'>
-                                <Calendar onChange={date => setSelectedDOB(date)} />
-                            </div>
-                            <button className='calendarBtn' onClick={saveDOB}>Save</button>
-                        </div>
-                        <button className="calendar-toggle-button" onClick={toggleCalendar}>
-                            <FaMinus />
-                        </button>
-                    </div>
-                ) : (
-                    <div className="bottom-button-container">
-                        <button className="calendar-toggle-button" onClick={toggleCalendar}>
-                            <FaMinus />
-                        </button>
-                    </div>
-                )}
             </div>
         </div>
     );
