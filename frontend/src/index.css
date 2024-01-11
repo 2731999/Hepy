@@ -937,7 +937,9 @@ input {
   text-align: center;
 }
 
-
+.profile-error-message {
+  margin-top: 1vh;
+}
 
 
 
