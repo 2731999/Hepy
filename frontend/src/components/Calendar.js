@@ -58,7 +58,7 @@ const Calendar = ({ dob, onDateSelect }) => {
         const today = new Date();
         const newDate = new Date(
             selectedYear || today.getFullYear(),
-            selectedMonth !== null ? selectedMonth - 1 : today.getMonth(),
+            selectedMonth !== null ? selectedMonth : today.getMonth(),
             day
         );
     
