@@ -140,8 +140,8 @@ const ProfileDetails = () => {
                 <button type="submit" className="verify-button" onClick={handleSubmit}>
                     Verify
                 </button>
-                {error && <div className="profile-error-message">{error}</div>}
             </div>
+            {error && <div className="profile-error-message">{error}</div>}
         </div>
     );
 };
