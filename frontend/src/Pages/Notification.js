@@ -15,14 +15,16 @@ const NotificationPage = () => {
     return (
         <div className="notification-page">
             <button className="skip-button" onClick={handleAboutmeSkipClick}>Skip</button>
-            <div className="message-image">
-                <img className='notifyimg' src={notifyimg} alt='notifyimg' />
+            <div className='notify-content'>
+                <div className="message-image">
+                    <img className='notifyimg' src={notifyimg} alt='notifyimg' />
+                </div>
+                <div className='notifyphara'>
+                    <p className="enable-notifications">Enable Notification's</p>
+                    <p className='notification-phara'>Get push notification when you get the match or receive a message.</p>
+                </div>
+                <button className="be-notified-button"> I want to be notified</button>
             </div>
-            <div className='notifyphara'>
-                <p className="enable-notifications">Enable Notification's</p>
-                <p className='notification-phara'>Get push notification when you get the match or receive a message.</p>
-            </div>
-            <button className="be-notified-button"> I want to be notified</button>
         </div>
     );
 };

@@ -181,6 +181,10 @@ function Verifications() {
                                     country={'us'}
                                     value={phone}
                                     onChange={(phone) => setPhone('+' + phone)}
+                                    style={{
+                                        width: '300px',
+                                        height: '50px', 
+                                    }}
                                 />
                             </div>
                         </div>

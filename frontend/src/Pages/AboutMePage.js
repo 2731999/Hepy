@@ -9,7 +9,7 @@ const GenderSelector = () => {
   const [selectedGender, setSelectedGender] = useState('');
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies("user1")
-  const [formData, setFormData] = useState({user_id: cookies.UserId,});
+  const [formData, setFormData] = useState({ user_id: cookies.UserId, });
   const [error, setError] = useState('');
 
 
@@ -91,12 +91,12 @@ const GenderSelector = () => {
               {option}
             </label>
           ))}
-          <button className="continue-button" onClick={handleContinueClick}>
-            Continue
-          </button>
           {error && <div className="error-message">{error}</div>}
         </div>
       </div>
+      <button className="continue-button" onClick={handleContinueClick}>
+        Continue
+      </button>
     </div>
   );
 };

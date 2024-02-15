@@ -22,19 +22,21 @@ function Discover() {
   const [genderedUsers, setGenderedUsers] = useState([])
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [likedProfiles, setLikedProfiles] = useState([]);
+  const [subscriptionData, setSubscriptionData] = useState(null);
   const userId = cookies.UserId
 
   const getUser = async () => {
     try {
       const response = await axios.get('https://hepy-backend.vercel.app/user', {
         params: { userId }
-      })
-      setUser(response.data)
+      });
+      setUser(response.data);
+      console.log("User data in Discover page:", response.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
-
+  
   const getGenderedUsers = async () => {
     try {
       if (user && user.Interested_in) {
@@ -121,8 +123,39 @@ function Discover() {
     }
   }
 
+  useEffect(() => {
+    // Fetch user data and subscription data when the component mounts
+    const fetchData = async () => {
+      try {
+        const userResponse = await axios.get('https://hepy-backend.vercel.app/user', {
+          params: { userId }
+        });
+        setUser(userResponse.data);
+        console.log("User data in Discover page:", userResponse.data);
+ 
+        // Fetch subscription data based on userId
+        const subscriptionResponse = await axios.get(`https://hepy-backend.vercel.app/getSubscription/${userId}`);
+        const subscriptionData = subscriptionResponse.data;
+        setSubscriptionData(subscriptionData);
+        console.log("Subscription data:", subscriptionData);
+        console.log("Subscription Plan:", subscriptionData.data.selectedPlan);
 
-  console.log(user)
+        // Fetch gendered users based on user's interested_in
+        if (userResponse.data && userResponse.data.Interested_in) {
+          const genderedResponse = await axios.get('https://hepy-backend.vercel.app/gendered-users', {
+            params: { gender: userResponse.data.Interested_in }
+          });
+          setGenderedUsers(genderedResponse.data);
+        }
+      } catch (error) {
+         console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  // console.log(user)
 
   const swiped = (direction, swipedUserId) => {
     if (direction === 'right') {
@@ -144,6 +177,11 @@ function Discover() {
 
   const handleLikesAndSuperlikesClick = () => {
     navigate('/LikesAndSuperLikes');
+  };
+
+  const handleFeedsClick = () => {
+    navigate('/Feeds', { state: { user } });
+    console.log("User data on Feeds page:", user);
   };
 
   let navigate = useNavigate();
@@ -211,7 +249,7 @@ function Discover() {
           </div>
           <footer className={`discover-footer${isChatOpen ? ' sticky' : ''}`}>
             <div className="discover-footer-icons">
-              <a href="#" className="discover-footer-icon" style={{ color: 'var(--hepygirlcolor)' }}>
+              <a href="#" className="discover-footer-icon" onClick={handleFeedsClick} style={{ color: 'var(--hepygirlcolor)' }}>
                 <FaClone />
               </a>
               <a href="#" className="discover-footer-icon" onClick={handleMessagesClick}>
@@ -229,7 +267,7 @@ function Discover() {
             <div className="discoveroverlay" onClick={togglediscoverFilter}></div>
           )}
           {isdiscoverFilterOpen ? (
-            <div className="discoverFilter-container" style={{ borderTopLeftRadius: '25px', borderTopRightRadius: '25px' }}>
+            <div className="discoverFilter-container">
               <button className="discoverFilter-toggle-button" onClick={togglediscoverFilter}>
                 <FaMinus />
               </button>
@@ -261,6 +299,12 @@ function Discover() {
                     onChange={(selectedOption) => {
                       const selected = countries.find((country) => country.isoCode === selectedOption.value);
                       setSelectedCountry(selected);
+                    }}
+                    styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        width: '27vw',
+                      }),
                     }}
                   />
                 </div>

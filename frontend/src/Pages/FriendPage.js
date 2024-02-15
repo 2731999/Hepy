@@ -80,7 +80,8 @@ const FriendPage = () => {
             <div className="friend-profile-container">
                 <div className="friend-profile-picture">
                     <div className="friend-picture">
-                    <img src={clickedProfile?.user?.Pic[0]} alt="User Profile" />
+                    {/* <img src={clickedProfile?.user?.Pic[0]} alt="male_logo" /> */}
+                    <img src={male_logo} alt="male_logo" />
                     </div>
                     <div className="friend-circles-picture">
                         <div className="friend-first-circle"><FaTimes /></div>

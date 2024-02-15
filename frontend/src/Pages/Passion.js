@@ -106,7 +106,7 @@ const Passion = () => {
         <div className="passionArrow" onClick={handleAboutmeSkipClick}><FaAngleLeft /></div>
         <div className="passionSkip" onClick={handleAboutmeArrowClick}>Skip</div>
       </header>
-      <div>
+      <div className='passion-head'>
         <h1 className="passionh1">Your interests</h1>
         <p className='passionPhara1'>Select a few of your interests and let everyone know what you are passionate about.</p>
       </div>

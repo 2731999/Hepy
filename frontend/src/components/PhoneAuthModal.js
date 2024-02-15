@@ -47,6 +47,13 @@ const PhoneAuthModal = ({ setShowModal, isSignUp }) => {
         return input;
     };
 
+    const customStyles = {
+        control: (provided) => ({
+            ...provided,
+            width: '400%',
+        }),
+    };
+
     // List of country options
     const countryOptions = [
         { label: 'United States (+1)', value: '+1' },
@@ -149,6 +156,7 @@ const PhoneAuthModal = ({ setShowModal, isSignUp }) => {
                         value={selectedCountry}
                         onChange={(option) => setSelectedCountry(option)}
                         isSearchable={true}
+                        styles={customStyles} 
                     />
                 </div>
                 <h5>Phone number</h5>

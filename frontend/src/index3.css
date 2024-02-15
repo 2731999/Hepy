@@ -41,9 +41,9 @@
 }
 
 .discover-card {
-    height: 55vh;
-    margin-top: 15px;
-    width: 80vw;
+    height: 50vh;
+    margin-top: -60px;
+    width: 22vw;
     border-radius: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.199);
@@ -93,7 +93,7 @@
 
 .discover-card-img img {
     width: 100%;
-    height: 55vh;
+    height: 50vh;
     object-fit: cover;
     border-radius: 20px;
     position: relative;
@@ -107,7 +107,7 @@
     color: white;
     bottom: 4vh;
     gap: 15px;
-    left: 5vw;
+    left: 2vw;
     font-size: 20px;
 }
 
@@ -116,7 +116,7 @@
     z-index: 3;
     color: white;
     bottom: 2vh;
-    left: 5vw;
+    left: 2vw;
     font-size: 12px;
     letter-spacing: 2px;
 }
@@ -134,7 +134,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 32vh;
+    margin-top: 23vh;
     position: sticky;
 }
 
@@ -221,9 +221,10 @@
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border: 1px solid #ccc;
-    width: 99%;
-    height: 78vh;
-    margin-top: -65vh;
+    width: 35%;
+    height: 83vh;
+    border-radius: 20px;
+    margin-top: -67vh;
     position: absolute;
     border: none;
     z-index: 1000;
@@ -232,6 +233,7 @@
     border: 1px solid #a0a096;
     line-height: 1.125em;
     text-align: center;
+    margin-left: 32vw;
 }
 
 .discoveroverlay {
@@ -250,7 +252,7 @@
 }
 
 .discover-filter-heding h2 {
-    margin-left: 30vw;
+    margin-left: 10vw;
     font-weight: bold;
     letter-spacing: 2px;
 }
@@ -261,7 +263,7 @@
     border: none;
     cursor: pointer;
     font-size: 14px;
-    margin-left: 16vw;
+    margin-left: 5vw;
 }
 
 .discover-filter-intrest {
@@ -320,7 +322,7 @@
     align-self: flex-start;
     color: gray;
     font-size: 12px;
-    margin-left: 17vw;
+    margin-left: 4vw;
     margin-bottom: 3px;
 }
 
@@ -370,7 +372,7 @@
     border: none;
     border-radius: 4px;
     outline: none;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
 }
 
 .filter-location-input input[type="range"]::-webkit-slider-thumb {
@@ -409,7 +411,7 @@
     border: none;
     border-radius: 4px;
     outline: none;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
 }
 
 .filter-age-input input[type="range"]::-webkit-slider-thumb {
@@ -448,7 +450,7 @@
 .discoverFilterclearBtn {
     color: white;
     height: 7vh;
-    width: 80vw;
+    width: 30vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -458,5 +460,402 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.616);
     font-weight: bold;
     font-size: 15px;
-    margin-left: 10vw;
+    margin-left: 2.5vw;
+}
+
+
+
+/* ----------------------------------------------------------Feed page------------------------------------------- */
+.feed-app-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feed-navbar {
+    background-color: #ffffff;
+    color: rgb(65, 65, 65);
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.feed-containers {
+    display: flex;
+    background-color: #ecfcff;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.feed-user {
+    width: 28%;
+    padding: 10px;
+    font-size: 13px;
+    align-items: flex-start;
+}
+
+.beingLiked-profiles {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.feed-user-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-list-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.feeds {
+    flex: 1 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1.1);
+    border-radius: 15px;
+    background: white;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.feed-search-bar {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: #bbbbbb;
+    border-radius: 15px;
+}
+
+.feed-search-bar input {
+    margin-left: 10px;
+    border: none;
+    background-color: #bbbbbb;
+    border-radius: 4px;
+}
+
+.feed-icons {
+    display: flex;
+    align-items: center;
+    gap: 150px;
+    font-size: 22px;
+}
+
+.feed-icons>*:hover,
+.feed-icons-l>*:hover {
+    color: #00d9ff;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+
+.feed-icons-l {
+    margin-left: 80px;
+    cursor: pointer;
+    font-size: 18px;
+    gap: 15px;
+    display: flex;
+    font-size: 22px;
+}
+
+.post-circular-container {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.post-circular-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pic-circular-container {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.pic-circular-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.feed-post {
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0d3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feed-post-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.feed-lc-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.feed-lc-counts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feed-lc-counts p {
+    margin-right: 20px;
+    font-size: 10px;
+}
+
+.feed-lc-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.like-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.unlike-button {
+    background-color: rgb(247, 49, 49);
+    color: white;
+    border: none;
+    padding: 6px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.like-button:hover {
+    background-color: #2980b9;
+}
+
+.liked-button:hover {
+    background-color: rgb(185, 27, 27);
+}
+
+.post-comments {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.post-comment-box {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+    color: #555555;
+}
+
+.comment-content {
+    text-align: left;
+    font-size: 12px;
+    margin-top: -5px;
+    color: #272727;
+}
+
+.comment-text-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-comment-text {
+    width: 70%;
+    height: 40px;
+    padding: 8px;
+    border: none;
+    background-color: rgba(245, 245, 245, 0.774);
+    border-radius: 10px;
+    border: 1px solid rgba(218, 217, 217, 0.829);
+    resize: none;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.post-comment-box button {
+    background-color: #1de5ff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.post-comment-box button:hover {
+    background-color: #45a08c;
+}
+
+
+.post-user-name {
+    font-size: 13px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.post-pic-name {
+    display: flex;
+}
+
+.post-upload-time {
+    margin-top: -22px;
+    font-size: 10px;
+    text-align: left;
+    padding-left: 55px;
+}
+
+.postContent {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+    padding-left: 5px;
+    font-size: 15px;
+}
+
+.feed-matches {
+    width: 28%;
+    padding: 10px;
+    font-size: 13px;
+    align-items: flex-start;
+}
+
+.feed-text {
+    width: 60%;
+    height: 40px;
+    padding: 8px;
+    border: none;
+    background-color: rgba(216, 216, 216, 0.774);
+    border-radius: 10px;
+    resize: none;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.feed-post-container {
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    width: 80%;
+}
+
+.feed-post-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.feed-img-container {
+    width: 100%;
+}
+
+.feed-postss {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.feed-posts {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feed-post-image {
+    height: 50px;
+    width: 50px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f35221;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-size: 10px;
+    width: 40px;
+    height: 12px;
+}
+
+.custom-file-upload:hover {
+    background-color: #a1230d;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.feed-matched-user-head {
+    display: flex;
+    justify-content: space-between;
 }

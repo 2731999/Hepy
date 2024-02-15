@@ -7,8 +7,8 @@
   background-color: #fff;
   color: #333;
   width: 100vw;
-  min-height: 100vh; 
-  justify-content: space-between; 
+  min-height: 92vh;
+  justify-content: space-between;
 }
 
 .toggle-message {
@@ -74,7 +74,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48vw;
+  gap: 4vw;
   padding-left: 5px;
 }
 
@@ -86,6 +86,10 @@
   background-color: white;
   z-index: 999;
   transition: top 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .Messages-header.sticky {
@@ -172,7 +176,7 @@
 .name-age {
   display: flex;
   align-items: center;
-  margin-left: -4px;
+  margin-left: 10px;
 }
 
 .message-received {
@@ -190,10 +194,10 @@
   display: flex;
   align-items: center;
   position: relative;
-  gap: 5vw;
+  gap: 12vw;
   color: white;
-  margin-top: 15px;
-  margin-left: -10px;
+  margin-top: -10px;
+  margin-left: 5px;
 }
 
 .message-menu {
@@ -211,14 +215,14 @@
 
 .friend-rows {
   display: flex;
-  flex-wrap: wrap; 
-  width: 96%;
+  flex-wrap: wrap;
+  width: 60%;
   padding: 10px;
 }
 
 .friend-row {
-  flex: 1; 
-  max-width: calc(50% - 5px); 
+  flex: 1;
+  max-width: calc(50% - 5px);
 }
 
 
@@ -230,7 +234,7 @@
   text-align: center;
   padding: 20px 0;
   position: sticky;
-  bottom: 0; 
+  bottom: 0;
   z-index: 999;
   width: 100%;
   margin-bottom: -50px;
@@ -268,8 +272,10 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  margin-top: 15vh;
-  height: 85vh;
+  height: 93.5vh;
+  padding: 20px;
+  width: 40vw;
+  margin-left: 57vw;
   position: absolute;
   border: none;
   z-index: 1000;
@@ -352,7 +358,7 @@
   padding: 19px;
   border: 1px solid rgb(184, 184, 184);
   border-radius: 15px;
-  width: 82%;
+  width: 23vw;
   padding-right: 38px;
   padding-left: 15px;
 }
@@ -366,15 +372,15 @@
   background-color: transparent;
   position: absolute;
   bottom: 2px;
-  right: -75px;
+  right: -10vw;
   color: var(--hepygirlcolor);
   font-size: 20px;
 }
 
 .msg-send-button {
   position: absolute;
-  top: 14px;
-  right: -5px;
+  top: 5px;
+  right: 10px;
   font-size: 18px;
   border: none;
   background-color: transparent;
@@ -401,7 +407,7 @@
   max-width: 55%;
   word-wrap: break-word;
   padding: 0px 20px 0px 17px;
-  margin-left: 92px;
+  margin-left: 15vw;
   margin-top: 25px;
   font-size: 13px;
   line-height: 1.5;
@@ -421,7 +427,6 @@
   max-width: 55%;
   word-wrap: break-word;
   padding: 0px 20px 0px 17px;
-  margin-left: 25px;
   margin-top: 25px;
   font-size: 13px;
   line-height: 1.5;
@@ -443,13 +448,108 @@
 }
 
 .timestamp-right {
-  margin-left: 60vw;
+  margin-left: 35vw;
 }
 
 .timestamp-left {
-  margin-right: 70vw;
+  margin-right: 35vw;
 }
 
+/* Style the capture audio time */
+.capture-audio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30vh;
+  gap: 10px;
+}
+
+.trash-icon {
+  text-align: left;
+  font-size: 30px;
+  color: #e74c3c;
+}
+
+.control-bar {
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: rgb(54, 54, 54);
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.capture-audio-time {
+  font-size: 15px;
+  font-weight: bold;
+  color: #e74c3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px;
+}
+
+.play-stop-audio {
+  color: #e74c3c;
+  display: flex;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.capture-audio-line {
+  color: lightgray;
+  font-size: 20px;
+  margin-left: 15px;
+  padding: 7px;
+}
+
+.capture-audio-wave {}
+
+.capture-audio-recording {
+  display: flex;
+  align-items: center;
+}
+
+.capture-audio-wave-span {
+  color: #3498db;
+}
+
+
+.capture-audio-microphone,
+.capture-audio-pause {
+  font-size: 30px;
+  cursor: pointer;
+  color: #e74c3c;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.capture-audio-pause:hover {
+  color: #3498db;
+}
+
+.audio-capture-send {
+  height: 6vh;
+  width: 12vw;
+  background-color: rgb(54, 54, 54);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-panel-header-icon {
+  font-size: 27px;
+  cursor: pointer;
+  color: #3498db;
+  transition: color 0.3s ease;
+}
+
+.text-panel-header-icon:hover {
+  color: #27ae60;
+}
 
 /* ----------------------------------------------------Self Page------------------------------------------------------ */
 
@@ -462,7 +562,7 @@
   padding: 25px;
   background-color: rgb(255, 228, 228);
   padding-bottom: 0px;
-  width: 87%;
+  width: 96.3%;
 }
 
 .self-profile-container {
@@ -479,9 +579,9 @@
 }
 
 .self-picture {
-  width: 87vw;
+  width: 95vw;
   height: 50vh;
-  margin-right: -310px;
+  margin-right: -325px;
   display: flex;
   align-items: flex-start;
   overflow: hidden;
@@ -531,19 +631,20 @@
 }
 
 .self-manage-subscription {
-  margin-left: 5vw;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   margin-top: 4vh;
+  display: flex;
+  justify-content: center;
 }
 
 .self-three-boxes {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: -5px;
   padding-left: 18px;
   padding-right: 18px;
-  gap: 10px;
+  gap: 30px;
 }
 
 .self-box-1 {
@@ -552,7 +653,7 @@
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 25vw;
+  width: 15vw;
   height: 12vh;
   display: flex;
   align-items: center;
@@ -568,7 +669,7 @@
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 25vw;
+  width: 15vw;
   height: 12vh;
   display: flex;
   align-items: center;
@@ -584,7 +685,7 @@
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 25vw;
+  width: 15vw;
   height: 12vh;
   display: flex;
   align-items: center;
@@ -670,6 +771,7 @@ hr {
 .self-gallery-heading {
   display: flex;
   margin-top: 3vh;
+  justify-content: space-between;
 }
 
 .self-gallery h2 {
@@ -680,17 +782,16 @@ hr {
 .self-gallery label {
   font-size: 12px;
   color: rgb(255, 91, 91);
-  margin-left: 36vw;
   margin-top: 3vh;
   font-weight: bold;
 }
 
 .self-big-boxes {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
   width: 100%;
-  height: 55vh;
+  height: 41vh;
   border-radius: 30px;
 }
 
@@ -704,7 +805,7 @@ hr {
 .self-big-photo-box img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 .self-small-photo-boxes {
@@ -790,19 +891,25 @@ hr {
 .self-small-interest-boxes {
   display: flex;
   flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
 }
 
 .self-small-interest-box {
-  background-color: #fff;
-  color: black;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 4px 5px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  font-size: 11px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  width: 67px;
+  padding: 4px 10px;
+  width: 17vw;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ccc;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.616);
+  border-radius: 15px;
+  transition: background-color 0.3s;
+  font-size: 10px;
 }
 
 .self-vertical-buttons-container {
@@ -815,7 +922,7 @@ hr {
 .self-vertical-button {
   color: white;
   height: 7vh;
-  width: 75vw;
+  width: 20vw;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -889,9 +996,9 @@ hr {
 }
 
 .self-picture.dark::after {
-    background: linear-gradient(to bottom, rgba(128, 128, 128, 0), rgb(73, 79, 85));
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+  background: linear-gradient(to bottom, rgba(128, 128, 128, 0), rgb(73, 79, 85));
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .self-profile-info.dark {
@@ -993,7 +1100,7 @@ hr {
   position: sticky;
   bottom: 0;
   z-index: 999;
-  width: 115%;
+  width: 100%;
   margin-bottom: -50px;
 }
 
@@ -1048,7 +1155,7 @@ hr {
 }
 
 .friend-picture {
-  width: 88vw;
+  width: 100%;
   height: 50vh;
   margin-right: -300px;
   display: flex;
@@ -1070,10 +1177,14 @@ hr {
 }
 
 .friend-picture img {
-  width: 99%;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
+}
+
+.friend-circles-picture {
+  display: flex;
 }
 
 .friend-first-circle {
@@ -1082,7 +1193,7 @@ hr {
   background-color: white;
   color: orange;
   border-radius: 50%;
-  margin-left: 48px;
+  margin-left: -34vw;
   position: absolute;
   margin-top: 13vh;
   font-size: 26px;
@@ -1097,7 +1208,7 @@ hr {
   background-color: rgb(255, 73, 73);
   color: white;
   border-radius: 50%;
-  margin-left: 108px;
+  margin-left: -28vw;
   margin-top: 11vh;
   position: absolute;
   font-size: 40px;
@@ -1112,7 +1223,7 @@ hr {
   background-color: white;
   color: purple;
   border-radius: 50%;
-  margin-left: 192px;
+  margin-left: -20vw;
   position: absolute;
   margin-top: 13vh;
   font-size: 26px;
@@ -1125,8 +1236,8 @@ hr {
 .friend-profile-info {
   position: absolute;
   font-family: Arial, Helvetica, sans-serif;
-  margin-top: 20vh;
-  margin-left: -5vw;
+  margin-top: 18vh;
+  margin-left: -73vw;
   color: black;
   padding-left: 20px;
   font-weight: bold;
@@ -1144,8 +1255,8 @@ hr {
   align-items: center;
   justify-content: center;
   display: flex;
-  margin-top: 23vh;
-  margin-left: 64vw;
+  margin-top: 21vh;
+  margin-left: 15vw;
 }
 
 .friend-user-info {
@@ -1368,18 +1479,24 @@ hr {
 .friend-small-interest-boxes {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .friend-small-interest-box {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 4px 2px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  font-size: 11px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  width: 79px;
+  padding: 8px 8px;
+  width: 10vw;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ccc;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.616);
+  border-radius: 15px;
+  transition: background-color 0.3s;
+  font-size: 8px;
 }
 
 /* --------friendPage Footer---------- */
@@ -1388,11 +1505,11 @@ hr {
   background-color: #f0f0f0;
   color: white;
   text-align: center;
-  padding: 20px 0; 
+  padding: 20px 0;
   position: sticky;
-  bottom: 0; 
+  bottom: 0;
   z-index: 999;
-  width: 115%;
+  width: 100%;
   margin-bottom: -50px;
 }
 
@@ -1429,6 +1546,13 @@ hr {
   height: 100vh;
 }
 
+.likes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .likes-main-head {
   display: flex;
   justify-content: space-between;
@@ -1458,7 +1582,7 @@ hr {
 .likes-head p {
   font-size: 14px;
 }
- 
+
 .liked-users-container {
   display: flex;
   flex-wrap: wrap;
@@ -1532,6 +1656,17 @@ hr {
   align-items: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.super-like-box-container-limit {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.super-like-box-container-limit>* {
+  flex-basis: calc(20% - 10px);
+  margin-bottom: 10px;
 }
 
 .super-like-box.super-liked {

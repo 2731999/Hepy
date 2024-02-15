@@ -18,29 +18,22 @@ const UploadPhotosComponent = () => {
             newselectedPic[index] = filesArray[0];
 
             const promises = newselectedPic.map(async (file) => {
-                if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
-                    const data = new FormData();
-                    data.append("file", file);
-                    data.append("upload_preset", "Hepy-App");
-                    data.append("cloud_name", "dbqu0itdj");
-                    const response = await fetch(
-                        " ",
-                        {
-                            method: "POST",
-                            body: data,
-                        }
-                    );
-                    const imageData = await response.json();
-                    return imageData.url;
+                if (file) {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    return new Promise((resolve) => {
+                        reader.onloadend = () => {
+                            resolve(reader.result);
+                        };
+                    });
                 } else {
                     return null;
                 }
             });
 
-            const imageUrls = await Promise.all(promises);
+            const base64Images = await Promise.all(promises);
 
-            setPic(imageUrls);
-            console.log(imageUrls);
+            setPic(base64Images);
             setselectedPic(newselectedPic);
         } catch (err) {
             console.error(err);
@@ -50,22 +43,28 @@ const UploadPhotosComponent = () => {
     const handlePhotosContinue = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('https://hepy-backend.vercel.app/user3', {
-                formData: {
-                    user_id: formData.user_id,
-                    pic: pic,
-                },
-            });
-            const success = response.status === 200;
-            if (success) {
-                localStorage.setItem("userInfo", JSON.stringify(response.data));
-                navigate('/InviteFriends');
-                console.log(response.data);
+            const chunkSize = 1024 * 1024; // 1MB chunk size
+            const totalChunks = Math.ceil(pic.length / chunkSize);
+    
+            for (let i = 0; i < totalChunks; i++) {
+                const start = i * chunkSize;
+                const end = (i + 1) * chunkSize;
+                const chunk = pic.slice(start, end);
+    
+                const formData = new FormData();
+                formData.append('user_id', cookies.UserId);
+                formData.append('pic', chunk);
+    
+                await axios.put('https://hepy-backend.vercel.app/user3', formData);
             }
+    
+            // Continue with your logic after all chunks are uploaded
+            navigate('/QuestionsPage');
         } catch (error) {
             console.error(error);
         }
-    };
+    };    
+    
 
     let navigate = useNavigate();
 
@@ -86,7 +85,7 @@ const UploadPhotosComponent = () => {
                                 key={index}
                                 index={index}
                                 onChange={(e) => handleFileChange(e, index)}
-                                selectedImage={selectedPic[index]}
+                                selectedImage={selectedPic[index]} 
                             />
                         ))}
                     </div>

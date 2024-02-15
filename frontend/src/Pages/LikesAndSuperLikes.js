@@ -83,7 +83,7 @@ const LikesAndSuperLikes = () => {
 
     return (
         <div className='likes-main'>
-            <div>
+            <div className='likes'>
                 <div className='likes-main-head'>
                     <div className='likes-head'>
                         <h1>Likes</h1>

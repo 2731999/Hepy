@@ -57,7 +57,7 @@ const ProfileDetails = () => {
             const success = response.status === 200;
 
             if (success) {
-                navigate('/Notification');
+                navigate('/AboutMePage');
             }
         } catch (err) {
             console.log(err);
@@ -105,26 +105,28 @@ const ProfileDetails = () => {
                 </div>
                 <form onSubmit={handleSubmit} className='form'>
                     <div className="form-group">
-                        <label className='formHead'>First Name</label>
-                        <input
-                            type="text"
-                            name="first_name"
-                            value={formData.first_name}
-                            onChange={handleInputChange}
-                            className='form-group-textarea'
-                        />
+                        <div className="form-subgroup">
+                            <label className='formHead'>First Name</label>
+                            <input
+                                type="text"
+                                name="first_name"
+                                value={formData.first_name}
+                                onChange={handleInputChange}
+                                className='form-group-textarea'
+                            />
+                        </div>
+                        <div className="form-subgroup">
+                            <label className='formHead'>Last Name</label>
+                            <input
+                                type="text"
+                                name="last_name"
+                                value={formData.last_name}
+                                onChange={handleInputChange}
+                                className='form-group-textarea'
+                            />
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label className='formHead'>Last Name</label>
-                        <input
-                            type="text"
-                            name="last_name"
-                            value={formData.last_name}
-                            onChange={handleInputChange}
-                            className='form-group-textarea'
-                        />
-                    </div>
-                    <div className="form-group">
+                    <div className="form-group-calendar">
                         <label className='formHead'>Date of Birth</label>
                         <Calendar dob={formData.DOB} onDateSelect={(date) => setFormData({ ...formData, DOB: date })} />
                     </div>

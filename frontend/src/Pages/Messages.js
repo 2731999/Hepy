@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import MessageListBox from '../components/MessageListBox';
 import ChatMessage from '../components/ChatMessages';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FaEllipsisV } from 'react-icons/fa';
 import { FaClone } from 'react-icons/fa';
 import { FaComment } from 'react-icons/fa';
@@ -14,6 +14,7 @@ import axios from 'axios';
 import { useCookies } from "react-cookie";
 import io from 'socket.io-client';
 import FriendPage from './FriendPage';
+import CaptureAudio from '../components/CaptureAudio';
 
 
 function calculateAge(dob) {
@@ -58,6 +59,7 @@ const Messages = ({ friend }) => {
     const [textArea, setTextArea] = useState(null)
     const [allMessages, setAllMessages] = useState([]);
     const [currentMessage, setCurrentMessage] = useState("");
+    const [showAudioRecoder, setShowAudioRecoder] = useState(false)
     const socket = io.connect('https://hepy-backend-abhisheks-projects-b60f698d.vercel.app/');
     console.log('Socket Connection:', socket.connected);
 
@@ -203,8 +205,29 @@ const Messages = ({ friend }) => {
 
     const descendingOrderMessages = allMessages?.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
 
-    const addMessage = async () => {
+    // const addMessage = async () => {
 
+    //     const messageData = {
+    //         timestamp: new Date().toISOString(),
+    //         from_userId: userId,
+    //         to_userId: clickedProfile.user_id,
+    //         message: newMessage,
+    //     };
+
+    //     try {
+    //         const response = await axios.post('https://hepy-backend.vercel.app/message', { message: messageData });
+    //         console.log('Message sent successfully:', response.data);
+    //         setNewMessage('');
+
+
+    //     } catch (error) {
+    //         console.error('Error sending the message:', error);
+    //     }
+    //     await socket.emit("send_message", messageData)
+    // };     
+
+
+    const addMessage = async () => {
         const messageData = {
             timestamp: new Date().toISOString(),
             from_userId: userId,
@@ -215,20 +238,34 @@ const Messages = ({ friend }) => {
         try {
             const response = await axios.post('https://hepy-backend.vercel.app/message', { message: messageData });
             console.log('Message sent successfully:', response.data);
+            setAllMessages((prevMessages) => [...prevMessages, messageData]);
             setNewMessage('');
 
-
+            await socket.emit("send_message", messageData);
         } catch (error) {
             console.error('Error sending the message:', error);
         }
-        await socket.emit("send_message", messageData)
     };
+
 
     useEffect(() => {
         socket.on('receive_message', (data) => {
             setAllMessages((prevMessages) => [...prevMessages, data]);
         });
     }, [socket]);
+
+    // useEffect(() => {
+    //     const socket = io.connect('https://hepy-backend-abhisheks-projects-b60f698d.vercel.app/');
+    //     socket.on('connect', () => {
+    //         console.log('Socket Connected:', socket.id);
+    //     });
+    //     socket.on('disconnect', () => {
+    //         console.log('Socket Disconnected');
+    //     });
+    //     return () => {
+    //         socket.disconnect();
+    //     };
+    // }, []);
 
     useEffect(() => {
         const socket = io.connect('https://hepy-backend-abhisheks-projects-b60f698d.vercel.app/');
@@ -238,12 +275,15 @@ const Messages = ({ friend }) => {
         socket.on('disconnect', () => {
             console.log('Socket Disconnected');
         });
+
+        socket.on('receive_message', (data) => {
+            setAllMessages((prevMessages) => [...prevMessages, data]);
+        });
+
         return () => {
             socket.disconnect();
         };
     }, []);
-
-
 
     const toggleDarkTheme = () => {
         setIsDarkIcon(!isDarkIcon);
@@ -336,7 +376,7 @@ const Messages = ({ friend }) => {
                             </div>
                         </div>
                         <div className="chat-messages">
-                            {allMessages.slice().reverse().map((message, index) => (
+                            {allMessages.reverse().map((message, index) => (
                                 <ChatMessage
                                     text={message.message}
                                     isSentByUser={message.from_userId === userId}
@@ -347,21 +387,33 @@ const Messages = ({ friend }) => {
                                 />
                             ))}
                         </div>
-                        <div className="chat-input-bar">
-                            <input
-                                className="chat-input-textarea"
-                                type="text"
-                                placeholder="Your message"
-                                value={newMessage}
-                                onChange={(e) => setNewMessage(e.target.value)}
-                            />
-                            <button className="msg-send-button" onClick={addMessage}>
-                                <FaPaperPlane />
-                            </button>
-                            <button className="mic-button" onClick={sendMessage}>
-                                <FaMicrophone />
-                            </button>
-                        </div>
+                        {
+                            !showAudioRecoder ? (
+                                <div className="chat-input-bar">
+                                    <input
+                                        className="chat-input-textarea"
+                                        type="text"
+                                        placeholder="Your message"
+                                        value={newMessage}
+                                        onChange={(e) => setNewMessage(e.target.value)}
+                                    />
+                                    <button className="msg-send-button" onClick={addMessage}>
+                                        <FaPaperPlane />
+                                    </button>
+                                    <button className="mic-button" title='record' onClick={() => setShowAudioRecoder(true)}>
+                                        <FaMicrophone />
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="chat-input-bar">
+                                    {null}
+                                    {/* <button className="mic-button" title='record' onClick={() => setShowAudioRecoder(false)}>
+                                        <FaMicrophone />
+                                    </button> */}
+                                </div>
+                            )
+                        }
+                        {showAudioRecoder && <CaptureAudio hide={setShowAudioRecoder} user={user}/>}
                     </div>
                 </>
             )}
