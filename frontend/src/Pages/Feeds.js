@@ -32,9 +32,10 @@ const Feeds = () => {
 
 
     const handleLike = async (index) => {
+        
         try {
             if (!likedPosts[index]) {
-                const response = await axios.post(`http://localhost:5000/likePost/${allPosts[index]._id}`);
+                const response = await axios.post(`https://hepy-web-backend.vercel.app/likePost/${allPosts[index]._id}`);
                 if (response.status === 200) {
                     const updatedPosts = [...allPosts];
                     updatedPosts[index].isLikedByCurrentUser = true;
@@ -59,7 +60,7 @@ const Feeds = () => {
     const handleUnlike = async (index) => {
         try {
             if (likedPosts[index]) {
-                const response = await axios.post(`http://localhost:5000/unlikePost/${allPosts[index]._id}`);
+                const response = await axios.post(`https://hepy-web-backend.vercel.app/unlikePost/${allPosts[index]._id}`);
                 if (response.status === 200) {
                     const updatedLikedPosts = [...likedPosts];
                     updatedLikedPosts[index] = false;
@@ -93,7 +94,7 @@ const Feeds = () => {
 
     const handleCommentSubmit = async (index) => {
         try {
-            const response = await axios.post(`http://localhost:5000/saveComment/${allPosts[index]._id}`, {
+            const response = await axios.post(`https://hepy-web-backend.vercel.app/saveComment/${allPosts[index]._id}`, {
                 userId: cookies.UserId,
                 commentContent,
             });
@@ -143,7 +144,7 @@ const Feeds = () => {
             formData.append('content', newPostContent);
             formData.append('image', image);
 
-            const response = await axios.post('http://localhost:5000/postFeedsUpload', formData);
+            const response = await axios.post('https://hepy-web-backend.vercel.app/postFeedsUpload', formData);
             const success = response.status === 200;
 
             if (success) {
@@ -178,7 +179,7 @@ const Feeds = () => {
 
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/user', {
+            const response = await axios.get('https://hepy-web-backend.vercel.app/user', {
                 params: { userId }
             });
 
@@ -204,7 +205,7 @@ const Feeds = () => {
     useEffect(() => {
         const fetchAllPosts = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/allPosts');
+                const response = await axios.get('https://hepy-web-backend.vercel.app/allPosts');
                 const fetchedPosts = response.data;
 
                 const sortedPosts = fetchedPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));

@@ -57,7 +57,7 @@ function Verifications() {
 
     const sendOtp = async () => {
         try {
-            const checkPhoneNumberResponse = await fetch('https://hepy-backend.vercel.app/check-phone-number-exists', {
+            const checkPhoneNumberResponse = await fetch('https://hepy-web-backend.vercel.app//check-phone-number-exists', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ function Verifications() {
                 return;
             }
 
-            const response = await axios.post('https://hepy-backend.vercel.app/phone-number', {
+            const response = await axios.post('https://hepy-web-backend.vercel.app//phone-number', {
                 email,
                 password,
                 phoneNumber: phone,

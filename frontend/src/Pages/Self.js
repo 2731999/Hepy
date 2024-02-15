@@ -71,7 +71,7 @@ const Self = () => {
 
                     console.log('Image URL:', imageUrl);
                     try {
-                        const saveResponse = await axios.post('https://hepy-backend.vercel.app/user3', {
+                        const saveResponse = await axios.post('https://hepy-web-backend.vercel.app//user3', {
                             userId: cookies.UserId,
                             photoUrl: imageUrl,
                         });
@@ -105,7 +105,7 @@ const Self = () => {
 
     const handleConfirmedDelete = async () => {
         try {
-            await axios.delete('https://hepy-backend.vercel.app/user', {
+            await axios.delete('https://hepy-web-backend.vercel.app//user', {
                 data: { userId },
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -148,7 +148,7 @@ const Self = () => {
 
     const getUser = async () => {
         try {
-            const response = await axios.get('https://hepy-backend.vercel.app/user', {
+            const response = await axios.get('https://hepy-web-backend.vercel.app//user', {
                 params: { userId }
             });
             setUser(response.data);

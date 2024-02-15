@@ -38,7 +38,7 @@ const GenderSelector = () => {
       return;
     }
     try {
-      const response = await axios.put('https://hepy-backend.vercel.app/user1', {
+      const response = await axios.put('https://hepy-web-backend.vercel.app//user1', {
         formData: {
           user_id: formData.user_id,
           gender: selectedGender,

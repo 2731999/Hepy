@@ -53,7 +53,7 @@ const ProfileDetails = () => {
         console.log("DOB:", formData.DOB);
 
         try {
-            const response = await axios.put('https://hepy-backend.vercel.app/user', { formData });
+            const response = await axios.put('https://hepy-web-backend.vercel.app//user', { formData });
             const success = response.status === 200;
 
             if (success) {

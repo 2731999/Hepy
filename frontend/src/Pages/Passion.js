@@ -58,7 +58,7 @@ const Passion = () => {
     }
 
     try {
-      const response = await axios.put('https://hepy-backend.vercel.app/user2', {
+      const response = await axios.put('https://hepy-web-backend.vercel.app//user2', {
         formData: {
           user_id: formData.user_id,
           passions: selectedpassions,

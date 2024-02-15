@@ -27,7 +27,7 @@ function Discover() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get('https://hepy-backend.vercel.app/user', {
+      const response = await axios.get('https://hepy-web-backend.vercel.app//user', {
         params: { userId }
       });
       setUser(response.data);
@@ -40,7 +40,7 @@ function Discover() {
   const getGenderedUsers = async () => {
     try {
       if (user && user.Interested_in) {
-        const response = await axios.get('https://hepy-backend.vercel.app/gendered-users', {
+        const response = await axios.get('https://hepy-web-backend.vercel.app//gendered-users', {
           params: { gender: user.Interested_in }
         })
         setGenderedUsers(response.data)
@@ -99,7 +99,7 @@ function Discover() {
   }
 
   const logRemovedUserMatches = (removedUserId) => {
-    axios.get('https://hepy-backend.vercel.app/user', { params: { userId: removedUserId } })
+    axios.get('https://hepy-web-backend.vercel.app//user', { params: { userId: removedUserId } })
       .then((response) => {
         const removedUserMatches = response.data.matches;
         console.log(`Matches for the removed user (ID: ${removedUserId}):`, removedUserMatches);
@@ -112,7 +112,7 @@ function Discover() {
 
   const updateMatches = async (matchedUserId) => {
     try {
-      const response = await axios.put('https://hepy-backend.vercel.app/addmatch', {
+      const response = await axios.put('https://hepy-web-backend.vercel.app//addmatch', {
         userId,
         matchedUserId
       });
@@ -127,14 +127,14 @@ function Discover() {
     // Fetch user data and subscription data when the component mounts
     const fetchData = async () => {
       try {
-        const userResponse = await axios.get('https://hepy-backend.vercel.app/user', {
+        const userResponse = await axios.get('https://hepy-web-backend.vercel.app//user', {
           params: { userId }
         });
         setUser(userResponse.data);
         console.log("User data in Discover page:", userResponse.data);
  
         // Fetch subscription data based on userId
-        const subscriptionResponse = await axios.get(`https://hepy-backend.vercel.app/getSubscription/${userId}`);
+        const subscriptionResponse = await axios.get(`https://hepy-web-backend.vercel.app//getSubscription/${userId}`);
         const subscriptionData = subscriptionResponse.data;
         setSubscriptionData(subscriptionData);
         console.log("Subscription data:", subscriptionData);
@@ -142,7 +142,7 @@ function Discover() {
 
         // Fetch gendered users based on user's interested_in
         if (userResponse.data && userResponse.data.Interested_in) {
-          const genderedResponse = await axios.get('https://hepy-backend.vercel.app/gendered-users', {
+          const genderedResponse = await axios.get('https://hepy-web-backend.vercel.app//gendered-users', {
             params: { gender: userResponse.data.Interested_in }
           });
           setGenderedUsers(genderedResponse.data);

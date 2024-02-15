@@ -33,7 +33,7 @@ const LikesAndSuperLikes = () => {
 
     const getUser = async () => {
         try {
-            const response = await axios.get('https://hepy-backend.vercel.app/user', {
+            const response = await axios.get('https://hepy-web-backend.vercel.app//user', {
                 params: { userId }
             })
             setUser(response.data)
@@ -45,7 +45,7 @@ const LikesAndSuperLikes = () => {
     const getLikedUsers = async (likedProfiles) => {
         try {
             if (likedProfiles && likedProfiles.length > 0) {
-                const response = await axios.get('https://hepy-backend.vercel.app/liked-users', {
+                const response = await axios.get('https://hepy-web-backend.vercel.app//liked-users', {
                     params: { gender: user.Interested_in }
                 });
 

@@ -55,7 +55,7 @@ const UploadPhotosComponent = () => {
                 formData.append('user_id', cookies.UserId);
                 formData.append('pic', chunk);
     
-                await axios.put('https://hepy-backend.vercel.app/user3', formData);
+                await axios.put('https://hepy-web-backend.vercel.app//user3', formData);
             }
     
             // Continue with your logic after all chunks are uploaded
